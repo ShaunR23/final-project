@@ -21,6 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["SECRET_KEY"]
+API_KEY = os.environ["API_KEY"]
+API_SECRET_KEY = os.environ["API_SECRET_KEY"]
+BEARER_TOKEN = os.environ["BEARER_TOKEN"]
+ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
+ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
      'whitenoise.runserver_nostatic',
+
+     'tweepy',
 
     'frontend.apps.FrontendConfig',
 ]
