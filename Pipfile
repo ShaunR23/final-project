@@ -8,6 +8,11 @@ django = "~=3.2.12"
 whitenoise = "*"
 gunicorn = "*"
 tweepy = "*"
+django-rest-auth = {extras = ["with_social"], version = "*"}
+django-rest-authtoken = "*"
+django-allauth = "*"
+django-rest-allauth = "*"
+django-permissions = "*"
 
 [dev-packages]
 

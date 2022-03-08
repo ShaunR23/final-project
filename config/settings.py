@@ -28,7 +28,6 @@ ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
 
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -38,6 +37,16 @@ ALLOWED_HOSTS = [
     'final-project-sr23.herokuapp.com',
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 
 # Application definition
@@ -49,11 +58,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'whitenoise.runserver_nostatic',
+    'django.contrib.sites',
+    'whitenoise.runserver_nostatic',
 
-     'tweepy',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.twitter',
+    'tweepy',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    
 
     'frontend.apps.FrontendConfig',
+    'accounts.apps.AccountsConfig',
+    'trivia.apps.TriviaConfig',
 ]
 
 MIDDLEWARE = [
@@ -142,11 +163,24 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'accounts.User'
+
+
 #static file directories
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'frontend/static/build/static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/static/build/static'),)
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE ='whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+SITE_ID = 1
 
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
+    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer',
+}
+
+# Email backend
+# https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

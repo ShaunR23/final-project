@@ -4,6 +4,7 @@ from .views import IndexView
 
 app_name = 'frontend'
 
-urlpatterns =[
+urlpatterns = [
+path('<path:resource>', IndexView.as_view()),
 path('',IndexView.as_view(), name='index')
 ]
