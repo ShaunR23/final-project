@@ -3,7 +3,8 @@
 module.exports = {
   content: [
     "./src/components/App.js",
-    "./src/components/Login.js"
+    "./src/components/Login.js",
+    "./src/components/Header.js",
   ],
   theme: {
     colors: {
@@ -16,6 +17,7 @@ module.exports = {
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
+      'dark-green': 'rgb(22 101 52)'
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
