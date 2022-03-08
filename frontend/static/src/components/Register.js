@@ -1,9 +1,9 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
-import { useOutletContext, Link } from "react-router-dom";
+
 
 function Register(props){
-    const navigate = useOutletContext();
+   
     const [state, setState] = useState({
         username: "",
         email: "",
@@ -80,12 +80,12 @@ function Register(props){
 
                 <div className="mb-4">
                     <label className="font-bold text-gray-darker block mb-2">Choose your Password</label>
-                    <input className='inputField' type='text' name='password1' id='password' onChange={handleInput} required value={state.password1} placeholder="Enter a Password" className="block appearance-none w-full bg-white border border-gray-light hover:border-gray px-2 py-2 rounded shadow" />
+                    <input className='inputField' type='password' name='password1' id='password' onChange={handleInput} required value={state.password1} placeholder="Enter a Password" className="block appearance-none w-full bg-white border border-gray-light hover:border-gray px-2 py-2 rounded shadow" />
                 </div>
 
                 <div className="mb-4">
                     <label className="font-bold text-gray-darker block mb-2">Type Password Again</label>
-                    <input className='inputField' type='text' name='password2' id='password' onChange={handleInput} required value={state.password2} placeholder="Confirm Password" className="block appearance-none w-full bg-white border border-gray-light hover:border-gray px-2 py-2 rounded shadow" />
+                    <input className='inputField' type='password' name='password2' id='password' onChange={handleInput} required value={state.password2} placeholder="Confirm Password" className="block appearance-none w-full bg-white border border-gray-light hover:border-gray px-2 py-2 rounded shadow" />
                 </div>
 
 

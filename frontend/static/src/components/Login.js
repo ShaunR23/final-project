@@ -68,7 +68,7 @@ function Login(props){
 
                 <div className="mb-4">
                 <label htmlFor="password" className="font-bold text-gray-darker block mb-2">Password</label>
-                    <input type='text' className='inputField' name='password' id='password' placeholder='password' onChange={handleInput} required value={state.password} className="block appearance-none w-full bg-white border border-gray-light hover:border-gray px-2 py-2 rounded shadow"/>
+                    <input type='password' className='inputField' name='password' id='password' placeholder='password' onChange={handleInput} required value={state.password} className="block appearance-none w-full bg-white border border-gray-light hover:border-gray px-2 py-2 rounded shadow"/>
                 </div>
 
                 <div className="flex items-center justify-between">
