@@ -2,6 +2,7 @@
 
 module.exports = {
   content: [
+    "./node_modules/flowbite/**/*.js",
     "./src/components/App.js",
     "./src/components/Login.js",
     "./src/components/Header.js",
@@ -26,5 +27,7 @@ module.exports = {
 
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }

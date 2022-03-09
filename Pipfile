@@ -13,6 +13,7 @@ django-rest-authtoken = "*"
 django-allauth = "*"
 django-rest-allauth = "*"
 django-permissions = "*"
+pillow = "*"
 
 [dev-packages]
 
