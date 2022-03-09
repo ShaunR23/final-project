@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
 import 'flowbite';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Questions from './components/Questions';
+import QuestionForm from './components/QuestionForm';
+import AdminView from './components/AdminView';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render(
@@ -15,6 +19,9 @@ ReactDOM.render(
         <Route path="/" element={<App />}>
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
+        <Route path="question-form" element={<QuestionForm />} />
+        <Route path="question-list" element={<Questions />} />
+        <Route path="admin" element={<AdminView />} />
         </Route>
       </Routes>
     </BrowserRouter>

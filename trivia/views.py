@@ -10,7 +10,7 @@ class QuestionListAPIView(generics.ListAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
-        return Question.objects.filter(phase='SUBMITTED')
+        return Question.objects.filter(phase='ACCEPTED')
 
 class UserQuestionListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthorOrReadOnly,)
@@ -18,7 +18,7 @@ class UserQuestionListAPIView(generics.ListCreateAPIView):
     
 
     def get_queryset(self):
-        return Question.objects.filter(author=self.request.user)
+        return Question.objects.filter(author=self.request.user, phase="DRAFT")
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -44,10 +44,14 @@ class QuestionAuthorListAPIView(generics.ListCreateAPIView):
 class QuestionApproveListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAdminUser,)
     serializer_class = QuestionAdminSerializer
-    queryset = Question.objects.all()
+
+    def get_queryset(self):
+        return Question.objects.filter(phase='SUBMITTED')
 
 class QuestionApproveChangeAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
     serializer_class = QuestionAdminSerializer
-    queryset = Question.objects.all()
+
+    def get_queryset(self):
+        return Question.objects.filter(self.request.id, phase='SUBMITTED')
 

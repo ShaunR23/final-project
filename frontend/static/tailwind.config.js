@@ -6,6 +6,7 @@ module.exports = {
     "./src/components/App.js",
     "./src/components/Login.js",
     "./src/components/Header.js",
+    "./src/components/QuestionForm.js",
   ],
   theme: {
     colors: {
