@@ -45,12 +45,27 @@ function App(handleError) {
       setAuth(false);
       Cookies.remove("Authorization");
     };
+
+    const headerProps = {
+      isAuth,
+      isAdmin,
+      setAuth,
+      handleLogout,
+    };
+  
+    const contextProps = {
+      isAdmin,
+      isAuth,
+      setAdmin,
+      setAuth,
+      navigate,
+    };
   
 
   return (
     <>
-   <Header handleLogout={handleLogout} />
-    <Outlet />
+   <Header {...headerProps} />
+    <Outlet context={{...contextProps}} />
     </>
     
   );

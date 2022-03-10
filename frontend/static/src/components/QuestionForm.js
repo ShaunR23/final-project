@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { handleError } from "../utils";
+import AdminView from "./AdminView";
 
 const INITIAL_STATE = {
   question: "",
@@ -68,7 +69,7 @@ function QuestionForm(props) {
 
     await fetch(`/api/v1/user/trivia/${pk}`, options.catch(handleError));
   };
-
+  
   return (
 <div className="bg-gray-lighter h-screen font-sans">
     <div className="container mx-auto h-full flex justify-center items-center">

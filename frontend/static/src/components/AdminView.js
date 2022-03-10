@@ -9,10 +9,10 @@ function AdminView(props, {setPhase}){
     const [view, setView] = useState(null);
     
     
-
+    
     useEffect(() => {
         const getQuestions = async () => {
-          const response = await fetch("/api/v1/user/trivia/").catch(handleError);
+          const response = await fetch("/api/v1/admin/").catch(handleError);
           if (!response.ok) {
             throw new Error("Network response was not OK!");
           } else {
@@ -24,6 +24,7 @@ function AdminView(props, {setPhase}){
       }, []);
 
       const handleDelete = async (id) => {
+       
             const options = {
               method: "DELETE",
               headers: {
@@ -32,7 +33,7 @@ function AdminView(props, {setPhase}){
               },
             };
         
-            const response = await fetch(`/api/v1/trivia/user/`, options).catch(
+            const response = await fetch(`/api/v1/admin/${props.id}`, options).catch(
               handleError
             );
         
@@ -84,6 +85,7 @@ return(
 
 AdminView.defaultProps = {
     questions: [],
+    
 };
 
 export default AdminView

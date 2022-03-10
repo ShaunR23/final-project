@@ -7,7 +7,8 @@ const INITIAL_STATE = {
   password: "",
 };
 function Login(props) {
-  const [setAuth, setAdmin] = useState(null);
+  const { navigate, setAuth, setAdmin } = useOutletContext();
+
 
   const [state, setState] = useState(INITIAL_STATE);
 
@@ -49,6 +50,7 @@ function Login(props) {
     setAuth(true);
     setAdmin(data.is_superuser);
     setState(INITIAL_STATE);
+    navigate("/", { replace: true });
   };
 
   return (

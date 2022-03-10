@@ -53,5 +53,6 @@ class QuestionApproveChangeAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = QuestionAdminSerializer
 
     def get_queryset(self):
-        return Question.objects.filter(self.request.id, phase='SUBMITTED')
+        
+        return Question.objects.all()
 
