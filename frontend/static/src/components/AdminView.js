@@ -4,11 +4,10 @@ import {Card, Button, Modal} from "react-bootstrap"
 import Cookies from "js-cookie";
 import QuestionForm from "./QuestionForm";
 
-function AdminView(props, {setPhase}){
+function AdminView(props){
     const [questions, setQuestions] = useState(props.questions);
     const [view, setView] = useState(null);
-    
-    
+    const [phase, setPhase] = useState();
     
     useEffect(() => {
         const getQuestions = async () => {
@@ -23,6 +22,22 @@ function AdminView(props, {setPhase}){
         getQuestions();
       }, []);
 
+      const publishQuestion = async (id) => {
+        
+        const options = {
+            method: "POST",
+            headers: {
+              "X-CSRFToken": Cookies.get("csrftoken"),
+            },
+          };
+      
+          await fetch(`/api/v1/admin/${id}`, options);
+           return props.phase = 'ACCEPTED'
+
+      }
+
+
+
       const handleDelete = async (id) => {
        
             const options = {
@@ -33,7 +48,7 @@ function AdminView(props, {setPhase}){
               },
             };
         
-            const response = await fetch(`/api/v1/admin/${props.id}`, options).catch(
+            const response = await fetch(`/api/v1/admin/${id}`, options).catch(
               handleError
             );
         
@@ -60,11 +75,11 @@ function AdminView(props, {setPhase}){
           <p>{question.incorrectAnswer3}</p>
           <p>Correct Answer = {question.correctAnswer}</p>
 
-          <button className="articleBtn" variant="primary" onClick={() => setPhase("ACCEPTED")}>
+          <button className="articleBtn" variant="primary" onClick={() => publishQuestion(question.id)}>
             Accept
           </button> 
           <br></br>
-          <button className="articleBtn" variant="primary" onClick={handleDelete}>
+          <button className="articleBtn" variant="primary" onClick={() => handleDelete(question.id)}>
             Delete
           </button>
         </Card.Body>
