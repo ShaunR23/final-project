@@ -5,6 +5,7 @@ import Header from './Header.js'
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 import { useNavigate, Outlet } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 function App(handleError) {
   const navigate = useNavigate();
   const [isAuth, setAuth] = useState(null);
@@ -66,8 +67,11 @@ function App(handleError) {
     <>
    <Header {...headerProps} />
     <Outlet context={{...contextProps}} />
-    </>
     
+    
+      
+    
+    </>
   );
 }
 

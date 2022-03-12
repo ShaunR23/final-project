@@ -11,6 +11,7 @@ import Questions from './components/Questions';
 import QuestionForm from './components/QuestionForm';
 import AdminView from './components/AdminView';
 import Game from './components/Game';
+import Home from './components/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render(
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Route path="question-list" element={<Questions />} />
         <Route path="admin" element={<AdminView />} />
         <Route path="game" element={<Game />} />
+        <Route path="home" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>
