@@ -3,7 +3,7 @@ import Questions from "./Questions";
 import { handleError } from "../utils";
 
 function CurrentQuestion({
-    
+        handleAnswer,
         incorrectAnswer1,
         incorrectAnswer2,
         incorrectAnswer3,
@@ -13,22 +13,47 @@ function CurrentQuestion({
         
 }) {
 return(
-    <article className="text-center">
-    <div>
-      <h6>{question}</h6>
-      <div>
-        <button>{incorrectAnswer1}</button>
-        <br></br>
-        <button>{incorrectAnswer2}</button>
-        <br></br>
-        <button>{incorrectAnswer3}</button>
-        <br></br>
-        <button>{correctAnswer}</button>
+    <>
+<div class="bg-gradient-to-r from-green-400 via-green-600 to-green-800 w-screen h-screen flex justify-center items-center">
+    <div class="container">
+        <div id="question-container" class="hide">
+            <div id="question">{question}</div>
+            <div id="answer-buttons" class="grid gap-4 grid-cols-2 my-7">
+                <button class="btn">{incorrectAnswer1}</button>
+                <button class="btn">{incorrectAnswer2}</button>
+                <button class="btn">{incorrectAnswer3}</button>
+                <button class="btn">{correctAnswer}</button>
+            </div>
+        </div>
+        {/* <div class="flex justify-center gap-4">
+            <button id="start-btn" class="bg-pink-700 px-9 py-3 text-white text-2xl rounded-lg hover:bg-pink-400">Start</button>
+            <button id="next-btn" class="bg-pink-700 px-9 py-3 text-white text-2xl rounded-lg hover:bg-pink-400">Next</button>
+        </div> */}
 
-      </div>
-    </div>
-  </article>
+        </div>
+
+</div>
+
+    </>
+
+
 )}
+{/* //     <article className="text-center">
+//     <div>
+//       <h6>{question}</h6>
+//       <div>
+//         <button>{incorrectAnswer1}</button>
+//         <br></br>
+//         <button>{incorrectAnswer2}</button>
+//         <br></br>
+//         <button>{incorrectAnswer3}</button>
+//         <br></br>
+//         <button onClick={handleAnswer}>{correctAnswer}</button>
+
+//       </div>
+//     </div>
+//   </article> */}
+ 
 
 function Game(props){
 const [questions, setQuestions] = useState(props.questions)
@@ -43,8 +68,8 @@ const handleAnswer = (e) => {
    
   };
 
-const handleChoice = (event) => {
-    event.preventDefault();
+const handleChoice = (e) => {
+    e.preventDefault();
 
     
   };

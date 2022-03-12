@@ -7,6 +7,7 @@ module.exports = {
     "./src/components/Login.js",
     "./src/components/Header.js",
     "./src/components/QuestionForm.js",
+    "./src/components/Game.js",
   ],
   theme: {
     colors: {
@@ -28,6 +29,7 @@ module.exports = {
 
     extend: {},
   },
+  presets: [require('full-palette')],
   plugins: [
     require('flowbite/plugin')
   ],
