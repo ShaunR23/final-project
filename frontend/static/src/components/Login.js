@@ -56,18 +56,18 @@ function Login(props) {
   return (
     <div className="bg-gray-lighter h-screen font-sans">
       <div className="container mx-auto h-full flex justify-center items-center">
-        <div className="w-1/3">
-          <h1 className="font-hairline mb-6 text-center">
+        <div className="">
+          <h1 className="font-hairline mb-6 text-center text-dark-green">
             Login to Press Start Trivia
           </h1>
           <form
             onSubmit={handleSubmit}
-            className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg"
+            className="border-dark-green p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg"
           >
             <div className="mb-4">
               <label
                 htmlFor="username"
-                className="font-bold text-gray-darker block mb-2"
+                className="font-bold text-dark-green block mb-2"
               >
                 Username
               </label>
@@ -87,7 +87,7 @@ function Login(props) {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="font-bold text-gray-darker block mb-2"
+                className="font-bold text-dark-green block mb-2"
               >
                 Password
               </label>
@@ -104,10 +104,10 @@ function Login(props) {
               />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-teal-dark hover:bg-teal text-dark-green font-bold py-2 px-4 rounded"
+                className="text-dark-green font-bold py-2 px-4 rounded border border-dark-green"
               >
                 Login
               </button>
@@ -123,7 +123,7 @@ function Login(props) {
           <div className="text-center">
             <p className="text-gray-dark text-sm">
               Don't have an account?{" "}
-              <a href="#" className="no-underline text-blue font-bold">
+              <a href="#" className="no-underline text-dark-green font-bold">
                 Create an Account
               </a>
               .

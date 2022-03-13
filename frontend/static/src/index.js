@@ -13,6 +13,7 @@ import AdminView from './components/AdminView';
 import Game from './components/Game';
 import Home from './components/Home';
 import Leaderboard from './components/Leaderboard';
+import ProfileView from './components/ProfileView';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render(
@@ -28,6 +29,7 @@ ReactDOM.render(
         <Route path="game" element={<Game />} />
         <Route path="home" element={<Home />} />
         <Route path="leaderboard" element={<Leaderboard />} />
+        <Route path="profile" element={<ProfileView />} />
         </Route>
       </Routes>
     </BrowserRouter>

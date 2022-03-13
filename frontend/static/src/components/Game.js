@@ -15,15 +15,15 @@ function CurrentQuestion({
 }) {
   return (
     <>
-      <div className="bg-gradient-to-r from-green-400 via-green-600 to-green-800 w-screen h-screen flex justify-center items-center">
+      <div className=" w-screen h-screen flex justify-center items-center">
         <div className="container">
           <div id="question-container" class="hide">
             <div id="question">{question}</div>
             <div id="answer-buttons" class="grid gap-4 grid-cols-2 my-7">
-              <button className="btn">{incorrectAnswer1}</button>
-              <button className="btn">{incorrectAnswer2}</button>
-              <button className="btn">{incorrectAnswer3}</button>
-              <button onClick={handleAnswer} className="btn">
+              <button className="btn ">{incorrectAnswer1}</button>
+              <button className="btn ">{incorrectAnswer2}</button>
+              <button className="btn ">{incorrectAnswer3}</button>
+              <button className="btn" onClick={handleAnswer}>
                 {correctAnswer}
               </button>
               <div className="text-green">{counter}</div>
@@ -33,6 +33,7 @@ function CurrentQuestion({
         </div>
       </div>
     </>
+    // bg-gradient-to-r from-green-400 via-green-600 to-green-800
   );
 }
 
@@ -41,11 +42,23 @@ function Game(props) {
   const [counter, setCounter] = useState(15);
   const [score, setScore] = useState(0)  
   
-  
+  const handleAnswer = (e) => {
+    e.preventDefault();
+    
+    const updatedQuestions = [...questions];
+    updatedQuestions.shift();
+    setQuestions(updatedQuestions);
+    score += counter ;
+    
+      
+    setCounter(15)
+  }
+
   const handleChoice = (e) => {
     e.preventDefault();
   };
 
+  
   
   useEffect(() => {
     const getQuestions = async () => {
@@ -60,17 +73,18 @@ function Game(props) {
     getQuestions();
   }, []);
 
-  const handleAnswer = (e) => {
-    e.preventDefault();
-    
-    const updatedQuestions = [...questions];
-    updatedQuestions.shift();
-    setQuestions(updatedQuestions);
-    score += counter ;
-    
-      
-    setCounter(15)
-  }
+  const trivia = questions
+    .slice(0, 10)
+    .map((question) => (
+      <CurrentQuestion
+        key={question.id}
+        {...question}
+        handleAnswer={handleAnswer}
+        counter={counter}
+      />
+    ));
+
+  
 
 
     useEffect(() => {
@@ -86,16 +100,7 @@ function Game(props) {
     return () => clearInterval(timer);
   }, [counter]);
 
-  const trivia = questions
-    .slice(0, 10)
-    .map((question) => (
-      <CurrentQuestion
-        key={question.id}
-        {...question}
-        handleAnswer={handleAnswer}
-        counter={counter}
-      />
-    ));
+  
   console.log(counter);
   console.log(score);
   console.log (trivia)
@@ -104,7 +109,7 @@ function Game(props) {
 
   return (
     <>
-      <div>{trivia}</div>
+      <div>{trivia[0]}</div>
     </>
   );
 }

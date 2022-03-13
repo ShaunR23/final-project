@@ -30,7 +30,7 @@ code {
 .container {
   width: 800px;
   max-width: 80%;
-  background-color: white;
+  background-color:#C0C0C0 ;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 0 10px 2px;
@@ -38,11 +38,12 @@ code {
 
 .btn {
   --hue: var(--hue-neutral);
-  border: 1px solid hsl(var(--hue), 100%, 30%);
-  background-color:gray ;
+  border: 1px solid green;
+  background-color: ;
   border-radius: 5px;
   padding: 5px 10px;
-  color: white;
+  border-width: medium;
+ 
   outline: none;
 }
 
@@ -58,6 +59,9 @@ code {
 .btn.wrong {
   --hue: var(--hue-wrong);
 }
+
+
+
 
 /* .hide {
   display: none;

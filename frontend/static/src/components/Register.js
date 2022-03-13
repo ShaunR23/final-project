@@ -60,7 +60,7 @@ function Register(props) {
   return (
     <div className="bg-gray-lighter h-screen font-sans">
       <div className="container mx-auto h-full flex justify-center items-center">
-        <div className="w-1/3">
+        <div className="">
           <h1 className="font-hairline mb-6 text-center">
             Login to Press Start Trivia
           </h1>
@@ -144,7 +144,7 @@ function Register(props) {
               </button>
 
               <a
-                className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark float-right"
+                className="no-underline  align-baseline font-bold text-sm text-blue hover:text-blue-dark"
                 href="#"
               >
                 Already Registered? Login Here!!

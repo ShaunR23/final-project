@@ -9,6 +9,7 @@ module.exports = {
     "./src/components/QuestionForm.js",
     "./src/components/Game.js",
     "./src/components/Leaderboard.js",
+    "./src/components/ProfileView.js",
   ],
   theme: {
     colors: {
