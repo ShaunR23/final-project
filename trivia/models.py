@@ -23,6 +23,6 @@ def __str__(self):
 
 class LeaderBoard(models.Model):
     score = models.IntegerField()
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     

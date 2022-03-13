@@ -9,6 +9,10 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    questions_right = models.IntegerField(default=0)
+    questions_total = models.IntegerField(default=0)
+    # profile_img = models.ImageField(
+    #     upload_to='account/', default='account/default-user.png')
     
     
     def __str__(self):

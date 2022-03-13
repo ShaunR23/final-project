@@ -8,7 +8,7 @@ from rest_auth.models import TokenModel
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('id', 'user')
+        fields = ('id', 'user','questions_right', 'questions_total' )
 
 
 class UserDetailsSerializer(UserDetailsSerializer):
