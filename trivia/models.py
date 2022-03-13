@@ -20,3 +20,9 @@ class Question(models.Model):
 
 def __str__(self):
         return self.question
+
+class LeaderBoard(models.Model):
+    score = models.IntegerField()
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    
