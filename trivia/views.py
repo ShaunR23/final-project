@@ -56,3 +56,8 @@ class QuestionApproveChangeAPIView(generics.RetrieveUpdateDestroyAPIView):
         
         return Question.objects.all()
 
+class QuestionGameListAPIView(generics.ListAPIView):
+    serializer_class = QuestionSerializer
+    def get_queryset(self):
+        return Question.objects.all()[0:10]
+

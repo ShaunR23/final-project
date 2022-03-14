@@ -25,4 +25,9 @@ class LeaderBoard(models.Model):
     score = models.IntegerField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+
+
+
+
+
     
