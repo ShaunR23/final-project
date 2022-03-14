@@ -17,9 +17,9 @@ function CurrentQuestion({
     <>
       <div className=" w-screen h-screen flex justify-center items-center">
         <div className="container">
-          <div id="question-container" class="hide">
+          <div id="question-container" className="hide">
             <div id="question">{question}</div>
-            <div id="answer-buttons" class="grid gap-4 grid-cols-2 my-7">
+            <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7">
               <button className="btn ">{incorrectAnswer1}</button>
               <button className="btn ">{incorrectAnswer2}</button>
               <button className="btn ">{incorrectAnswer3}</button>
