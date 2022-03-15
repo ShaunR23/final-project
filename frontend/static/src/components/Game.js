@@ -1,50 +1,36 @@
 import { useState, useEffect } from "react";
 import Questions from "./Questions";
 import { handleError } from "../utils";
+import Leaderboard from "./Leaderboard";
+import Cookies from "js-cookie";
 
-function CurrentQuestion( {
-    
+function CurrentQuestion({
+  isCorrect,
   counter,
   score,
   handleAnswer,
-  incorrectAnswer1,
-  incorrectAnswer2,
-  incorrectAnswer3,
+  shuffled_answers,
   question,
   correctAnswer,
 }) {
-    
-  
-  function shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
 
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
+const [selection, setSelection]= useState(false);
 
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
-    }
 
-    return array;
-  }
 
-  const answers = [
-    { incorrectAnswer1 : false },
-    { incorrectAnswer2: false },
-    { incorrectAnswer3: false },
-    { correctAnswer: true },
-  ];
+  const revealAnswer = () => (
+    <div>Wrong, the correct answer is {correctAnswer}</div>
+  );
+  const correct = () => <div>Correct!!</div>;
 
-  shuffle(answers)
-  const answerButton = Object.keys(answers).map((key) => (
-    <button className="btn " onClick={() => handleAnswer(answers[key])}>
-      {key}
-    </button>
-  ));
+  const answerButtons = shuffled_answers.map((answer) => {
+    const key = Object.keys(answer)[0];
+    return (
+      <button className="btn" onClick={() => handleAnswer(answer[key])}>
+        {[key]}
+      </button>
+    );
+  });
 
   return (
     <>
@@ -53,22 +39,10 @@ function CurrentQuestion( {
           <div id="question-container" className="hide">
             <div id="question">{question}</div>
             <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7">
-                {answerButton}
-            
-              {/* <button className="btn " onClick={handleWrongAnswer}>
-                {incorrectAnswer1}
-              </button>
-              <button className="btn " onClick={handleWrongAnswer}>
-                {incorrectAnswer2}
-              </button>
-              <button className="btn" onClick={handleWrongAnswer}>
-                {incorrectAnswer3}
-              </button>
-              <button className="btn" onClick={handleAnswer}>
-                {correctAnswer}
-              </button> */}
+              {answerButtons}
               <div className="text-green">{counter}</div>
-              <div>score = {score}</div>
+              <div> score = {score}</div>
+              <div> {isCorrect ? correct() : revealAnswer()} </div>
             </div>
           </div>
         </div>
@@ -78,44 +52,39 @@ function CurrentQuestion( {
   );
 }
 
-function Game(props, { choices }) {
+function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, key}) {
   const [questions, setQuestions] = useState(props.questions);
   const [counter, setCounter] = useState(15);
+  const [gameOver, setGameOver] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
   let [score, setScore] = useState(null);
   let [rightAnswer, setRightAnswer] = useState(null);
   let [totalAnswer, setTotalAnswer] = useState(null);
+  let [questionCount, setQuestionCount] = useState(null);
 
   const handleAnswer = () => {
     setTimeout(() => {
-    if (true){
-      const updatedQuestions = [...questions];
-      updatedQuestions.shift();
-      setQuestions(updatedQuestions);
-      setCounter(15);
-      setScore((score += counter));
-      setRightAnswer(rightAnswer + 1);
-      setTotalAnswer(totalAnswer + 1);
-    }
-
-    else{
-      const updatedQuestions = [...questions];
-      updatedQuestions.shift();
-      setQuestions(updatedQuestions);
-      setCounter(15);
-      setTotalAnswer(totalAnswer + 1);
-    }
+      if (true) {
+        const updatedQuestions = [...questions];
+        updatedQuestions.shift();
+        setQuestions(updatedQuestions);
+        setCounter(15);
+        setScore((score += counter));
+        setRightAnswer(rightAnswer + 1);
+        setTotalAnswer(totalAnswer + 1);
+        setQuestionCount(questionCount + 1);
+        setIsCorrect(true);
+      }
+      else  {
+        const updatedQuestions = [...questions];
+        updatedQuestions.shift();
+        setQuestions(updatedQuestions);
+        setCounter(15);
+        setTotalAnswer(totalAnswer + 1);
+        setQuestionCount(questionCount + 1);
+      }
     }, 3000);
   };
-
-//   const handleWrongAnswer = (e) => {
-//     setTimeout(() => {
-//       const updatedQuestions = [...questions];
-//       updatedQuestions.shift();
-//       setQuestions(updatedQuestions);
-//       setCounter(15);
-//       setTotalAnswer(totalAnswer + 1);
-//     }, 3000);
-//   };
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -141,6 +110,7 @@ function Game(props, { choices }) {
         setQuestions(updatedQuestions);
         setCounter(15);
         setTotalAnswer(totalAnswer + 1);
+        setQuestionCount(questionCount + 1);
       }, 3000);
     }
 
@@ -151,21 +121,46 @@ function Game(props, { choices }) {
     .slice(0, 10)
     .map((question) => (
       <CurrentQuestion
-        
         {...question}
         handleAnswer={handleAnswer}
         counter={counter}
       />
     ));
+
+    
+  
+    //   await fetch("/api/v1/user/leaderboard/", options);
+    //   setState({ ...state, ...INITIAL_STATE });
+    // };
+  
+
+  if (questionCount > 10) {
+    setGameOver(true);
+//     const options = {
+//         method: "POST",
+//         headers: {
+//           "X-CSRFToken": Cookies.get("csrftoken"),
+//         },
+//         body: score,
+//       };
+//       await fetch("/api/v1/leaderboard/", options);
+   }
+
+  const gameOverScreen = (
+    <div>
+      {rightAnswer}: {totalAnswer}: {score}
+    </div>
+  );
   console.log(counter);
   console.log(score);
   console.log(trivia);
   console.log(rightAnswer);
   console.log(totalAnswer);
+  console.log(gameOver);
 
   return (
     <>
-      <div>{trivia}</div>
+      <div>{trivia[0]}</div>
     </>
   );
 }

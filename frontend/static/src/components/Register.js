@@ -23,7 +23,7 @@ function Register(props) {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+  
 
     if (state.password1 !== state.password2) {
       alert("Passwords do not match!!");
@@ -61,7 +61,7 @@ function Register(props) {
     <div className="bg-gray-lighter h-screen font-sans">
       <div className="container mx-auto h-full flex justify-center items-center">
         <div className="">
-          <h1 className="font-hairline mb-6 text-center">
+          <h1 className="font-hairline text-dark-green mb-6 text-center">
             Login to Press Start Trivia
           </h1>
           <form
@@ -138,13 +138,13 @@ function Register(props) {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg-teal-dark hover:bg-teal text-white font-bold py-2 px-4 rounded"
+                className="bg-gray-light hover:bg-teal  font- text-dark-green border py-2 px-4 rounded"
               >
                 Create Account
               </button>
 
               <a
-                className="no-underline  align-baseline font-bold text-sm text-blue hover:text-blue-dark"
+                className="no-underline m-2  align-baseline font-bold text-sm text-blue hover:text-blue-dark"
                 href="#"
               >
                 Already Registered? Login Here!!

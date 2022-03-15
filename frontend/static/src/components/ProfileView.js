@@ -1,5 +1,5 @@
 
-function ProfileView(){
+function ProfileView({totalAnswer, rightAnswer, score}){
 
     return(
         <div className="h-screen bg-gray-300">
@@ -12,9 +12,9 @@ function ProfileView(){
                         <h3 className="text-2xl">Shaun</h3> <span>sub text</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-gray-200 rounded-lg">
-                        <div className="mr-3"> <span className="text-gray-400 block">Total Right</span> <span className="font-bold text-black text-xl">34</span> </div>
-                        <div className="mr-3"> <span className="text-gray-400 block">Total Attempts</span> <span className="font-bold text-black text-xl">940</span> </div>
-                        <div> <span className="text-gray-400 block">Percentage or grade?</span> <span className="font-bold text-black text-xl">8.9</span> </div>
+                        <div className="mr-3"> <span className="text-gray-400 block">Total Right</span> <span className="font-bold text-black text-xl">{rightAnswer}</span> </div>
+                        <div className="mr-3"> <span className="text-gray-400 block">Questions</span> <span className="font-bold text-black text-xl">{totalAnswer}</span> </div>
+                        <div> <span className="text-gray-400 block">Score</span> <span className="font-bold text-black text-xl">{score}</span> </div>
                     </div>
                 </div>
             </div>

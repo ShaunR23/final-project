@@ -1,6 +1,22 @@
-
+import { useEffect, useState } from "react";
+import { handleError } from "../utils";
 
 function Leaderboard(props){
+    const [leaderboard, setLeaderBoard] = useState(props.leaderboard)
+
+    useEffect(() => {
+        const getLeaderBoard = async () => {
+          const response = await fetch("/api/v1/leaderboard/").catch(handleError);
+          if (!response.ok) {
+            throw new Error("Network response was not OK!");
+          } else {
+            const data = await response.json();
+            setLeaderBoard(data);
+          }
+        };
+        getLeaderBoard();
+      }, []);
+    
 
 return(
 <div className="flex flex-row">
@@ -32,10 +48,10 @@ Score
 1
 </td>
 <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-Name
+{props.user}
 </td>
 <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-Score
+{props.score}
 </td>
 </tr>
 
@@ -156,10 +172,10 @@ Accessories
 
 
 
-<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-<div class="inline-block py-2 min-w-full sm:px-6 lg:px-8 ">
-<div class="overflow-hidden shadow-md sm:rounded-lg">
-<table class="min-w-full m-20">
+<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+<div className="inline-block py-2 min-w-full sm:px-6 lg:px-8 ">
+<div className="overflow-hidden shadow-md sm:rounded-lg">
+<table className="min-w-full m-20">
 
 <thead className="bg-gray-50 dark:bg-gray-700">
 <h2 className = "justify-center">Normal</h2>

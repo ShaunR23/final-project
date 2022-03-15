@@ -8,4 +8,5 @@ urlpatterns = [
     path('user/trivia/', views.UserQuestionListAPIView.as_view()),
     path('trivia/', views.QuestionListAPIView.as_view()),
     path('daily-trivia/', views.QuestionGameListAPIView.as_view()),
+    path('leaderboard/', views.LeaderBoardListAPIView.as_view()),
 ]

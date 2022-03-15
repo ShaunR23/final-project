@@ -10,6 +10,7 @@ module.exports = {
     "./src/components/Game.js",
     "./src/components/Leaderboard.js",
     "./src/components/ProfileView.js",
+    "./src/components/Home.js",
   ],
   theme: {
     colors: {
