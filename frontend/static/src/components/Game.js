@@ -8,21 +8,13 @@ function CurrentQuestion({
   isCorrect,
   counter,
   score,
+  setScore,
   handleAnswer,
   shuffled_answers,
   question,
   correctAnswer,
 }) {
-
-const [selection, setSelection]= useState(false);
-
-
-    
-  const revealAnswer = () => (
-    <div>Wrong, the correct answer is {correctAnswer}</div>
-  );
-  const correct = () => <div>Correct!!</div>;
-
+  const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
   const answerButtons = shuffled_answers.map((answer) => {
     const key = Object.keys(answer)[0];
     return (
@@ -41,8 +33,8 @@ const [selection, setSelection]= useState(false);
             <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7">
               {answerButtons}
               <div className="text-green">{counter}</div>
-              <div> score = {score}</div>
-              <div> <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
+              <div className="text-green"> score = {score}</div>
+              {/* <div><{ isCorrect ? correct() : revealAnswer()}</div> */}
             </div>
           </div>
         </div>
@@ -52,7 +44,7 @@ const [selection, setSelection]= useState(false);
   );
 }
 
-function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, key}) {
+function Game(props, { revealAnswer }) {
   const [questions, setQuestions] = useState(props.questions);
   const [counter, setCounter] = useState(15);
   const [gameOver, setGameOver] = useState(false);
@@ -62,11 +54,13 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
   let [totalAnswer, setTotalAnswer] = useState(null);
   let [questionCount, setQuestionCount] = useState(null);
 
-  console.log(key)
+  const correct = "Correct!!";
 
-  const handleAnswer = () => {
+  const handleAnswer = (value, revealAnswer) => {
     setTimeout(() => {
-      if (props.questions.correctAnswer = true) {
+      if (questionCount > 10) {
+        setGameOver(true);
+      } else if (value == true) {
         const updatedQuestions = [...questions];
         updatedQuestions.shift();
         setQuestions(updatedQuestions);
@@ -75,15 +69,15 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
         setRightAnswer(rightAnswer + 1);
         setTotalAnswer(totalAnswer + 1);
         setQuestionCount(questionCount + 1);
-        setIsCorrect(true);
-      }
-      else  {
+        alert(correct);
+      } else {
         const updatedQuestions = [...questions];
         updatedQuestions.shift();
         setQuestions(updatedQuestions);
         setCounter(15);
         setTotalAnswer(totalAnswer + 1);
         setQuestionCount(questionCount + 1);
+        alert(revealAnswer);
       }
     }, 3000);
   };
@@ -102,22 +96,26 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
   }, []);
 
   useEffect(() => {
-    const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    if (questionCount > 9) {
+      setGameOver(true);
+    } else if (questionCount < 10) {
+      let timer =
+        counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
 
-    if (timer == 0) {
-      setTimeout(() => {
-        const updatedQuestions = [...questions];
-        updatedQuestions.shift();
-        setQuestions(updatedQuestions);
-        setCounter(15);
-        setTotalAnswer(totalAnswer + 1);
-        setQuestionCount(questionCount + 1);
-        setIsCorrect(null)
-      }, 3000);
+      if (timer == 0) {
+        setTimeout(() => {
+          const updatedQuestions = [...questions];
+          updatedQuestions.shift();
+          setQuestions(updatedQuestions);
+          setCounter(15);
+          setTotalAnswer(totalAnswer + 1);
+          setQuestionCount(questionCount + 1);
+          setIsCorrect(null);
+        }, 3000);
+      }
+
+      return () => clearInterval(timer);
     }
-
-    return () => clearInterval(timer);
   }, [counter]);
 
   let trivia = questions
@@ -127,26 +125,33 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
         {...question}
         handleAnswer={handleAnswer}
         counter={counter}
+        score = {score}
       />
     ));
 
-  
+  //         const options = {
+  //             method: "POST",
+  //             headers: {
+  //                 'Accept': 'application/json',
+  //                 "X-CSRFToken": Cookies.get("csrftoken"),
+  //             },
+  //             body: JSON.stringify()
+  //           };
+  //            fetch("/api/v1/score/", options);
+  //   }
 
-  if (questionCount > 10) {
-    setGameOver(true);
-//     const options = {
-//         method: "POST",
-//         headers: {
-//           "X-CSRFToken": Cookies.get("csrftoken"),
-//         },
-//         body: score,
-//       };
-//       await fetch("/api/v1/leaderboard/", options);
-   }
-
-  const gameOverScreen = (
-    <div>
-      {rightAnswer}: {totalAnswer}: {score}
+  const gameOverScreen = () => (
+    <div className=" w-screen h-screen flex justify-center items-center">
+      <div className="container">
+        <div id="question-container" className="hide">
+          <div id="question"></div>
+          <div>
+            Correct Answers = {rightAnswer}: Total Questions {totalAnswer}: score = {score}
+          </div>
+          <div className="text-green">{counter}</div>
+          <div className="text-green"> score = {score}</div>
+        </div>
+      </div>
     </div>
   );
   console.log(counter);
@@ -158,7 +163,8 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
 
   return (
     <>
-      <div>{trivia[0]}</div>
+      {/* <div>{trivia[0]}</div> */}
+      <div>{gameOver ? gameOverScreen() : trivia[0]}</div>
     </>
   );
 }
@@ -167,3 +173,9 @@ Game.defaultProps = {
 };
 
 export default Game;
+
+// function add(num1, num2) {
+//     return num1 + num2;
+// }
+
+// add(2, 34)

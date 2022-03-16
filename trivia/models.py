@@ -21,13 +21,14 @@ class Question(models.Model):
 def __str__(self):
         return self.question
 
-class LeaderBoard(models.Model):
-    game_mode = models.CharField(max_length=255, blank = True)
+class Score(models.Model):
+
     score = models.IntegerField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
 
-
+    def __str__(self):
+        return self.user
 
 
 

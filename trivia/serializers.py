@@ -1,7 +1,7 @@
 import random
 
 from rest_framework import serializers
-from .models import LeaderBoard, Question
+from .models import Question, Score
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -35,10 +35,10 @@ class QuestionAdminSerializer(serializers.ModelSerializer):
         model = Question
         fields = '__all__'
 
-class LeaderBoardSerializer(serializers.ModelSerializer):
+class ScoreSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = LeaderBoard
+        model = Score
         fields = ('__all__')
 
     def get_highest_score(self, obj):

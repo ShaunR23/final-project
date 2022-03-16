@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
-from .models import LeaderBoard, Question
-from .serializers import LeaderBoardSerializer, QuestionSerializer, UserQuestionSerializer, QuestionAdminSerializer
+from .models import  Question, Score
+from .serializers import  QuestionSerializer, UserQuestionSerializer, QuestionAdminSerializer, ScoreSerializer
 from .permissions import IsAuthorOrReadOnly
 
 class QuestionListAPIView(generics.ListAPIView):
@@ -61,8 +61,8 @@ class QuestionGameListAPIView(generics.ListAPIView):
     def get_queryset(self):
         return Question.objects.all()[0:10]
 
-class LeaderBoardListAPIView(generics.ListAPIView):
-    serializer_class = LeaderBoardSerializer
+class ScoreListAPIView(generics.ListAPIView):
+    serializer_class = ScoreSerializer
     def get_queryset(self):
-        return LeaderBoard.objects.all()
+        return Score.objects.all()
 
