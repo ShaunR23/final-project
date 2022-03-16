@@ -17,7 +17,7 @@ function CurrentQuestion({
 const [selection, setSelection]= useState(false);
 
 
-
+    
   const revealAnswer = () => (
     <div>Wrong, the correct answer is {correctAnswer}</div>
   );
@@ -42,7 +42,7 @@ const [selection, setSelection]= useState(false);
               {answerButtons}
               <div className="text-green">{counter}</div>
               <div> score = {score}</div>
-              <div> {isCorrect ? correct() : revealAnswer()} </div>
+              <div> <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
             </div>
           </div>
         </div>
@@ -62,9 +62,11 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
   let [totalAnswer, setTotalAnswer] = useState(null);
   let [questionCount, setQuestionCount] = useState(null);
 
+  console.log(key)
+
   const handleAnswer = () => {
     setTimeout(() => {
-      if (true) {
+      if (props.questions.correctAnswer = true) {
         const updatedQuestions = [...questions];
         updatedQuestions.shift();
         setQuestions(updatedQuestions);
@@ -111,6 +113,7 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
         setCounter(15);
         setTotalAnswer(totalAnswer + 1);
         setQuestionCount(questionCount + 1);
+        setIsCorrect(null)
       }, 3000);
     }
 
@@ -127,11 +130,6 @@ function Game(props, {answer, shuffled_answers, correctAnswer, answerButtons, ke
       />
     ));
 
-    
-  
-    //   await fetch("/api/v1/user/leaderboard/", options);
-    //   setState({ ...state, ...INITIAL_STATE });
-    // };
   
 
   if (questionCount > 10) {

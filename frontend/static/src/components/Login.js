@@ -105,6 +105,7 @@ function Login(props) {
 
             <div className="flex justify-center">
               <button
+              id = "login-submit"
                 type="submit"
                 className="text-dark-green font-bold py-2 px-4 rounded border border-dark-green"
               >
