@@ -3,6 +3,9 @@ import Questions from "./Questions";
 import { handleError } from "../utils";
 import Leaderboard from "./Leaderboard";
 import Cookies from "js-cookie";
+import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+
+
 
 function CurrentQuestion({
   isCorrect,
@@ -14,7 +17,7 @@ function CurrentQuestion({
   question,
   correctAnswer,
 }) {
-  const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
+    const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
   const answerButtons = shuffled_answers.map((answer) => {
     const key = Object.keys(answer)[0];
     return (
@@ -24,6 +27,7 @@ function CurrentQuestion({
     );
   });
 
+  
   return (
     <>
       <div className=" w-screen h-screen flex justify-center items-center">
@@ -44,7 +48,7 @@ function CurrentQuestion({
   );
 }
 
-function Game(props, { revealAnswer }) {
+function Game(props, revealAnswer) {
   const [questions, setQuestions] = useState(props.questions);
   const [counter, setCounter] = useState(15);
   const [gameOver, setGameOver] = useState(false);
@@ -54,9 +58,10 @@ function Game(props, { revealAnswer }) {
   let [totalAnswer, setTotalAnswer] = useState(null);
   let [questionCount, setQuestionCount] = useState(null);
 
+  
   const correct = "Correct!!";
-
-  const handleAnswer = (value, revealAnswer) => {
+  
+  const handleAnswer = (value) => {
     setTimeout(() => {
       if (questionCount > 10) {
         setGameOver(true);
@@ -96,9 +101,9 @@ function Game(props, { revealAnswer }) {
   }, []);
 
   useEffect(() => {
-    if (questionCount > 9) {
+    if (questionCount > 2) {
       setGameOver(true);
-    } else if (questionCount < 10) {
+    } else if (questionCount < 3) {
       let timer =
         counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
 
@@ -126,6 +131,7 @@ function Game(props, { revealAnswer }) {
         handleAnswer={handleAnswer}
         counter={counter}
         score = {score}
+        
       />
     ));
 
@@ -139,6 +145,25 @@ function Game(props, { revealAnswer }) {
   //           };
   //            fetch("/api/v1/score/", options);
   //   }
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    
+    t._e = [];
+    t.ready = function(f) {
+    t._e.push(f);
+    };
+    
+    return t;
+    }(document, "script", "twitter-wjs"));
+  
 
   const gameOverScreen = () => (
     <div className=" w-screen h-screen flex justify-center items-center">
@@ -150,6 +175,14 @@ function Game(props, { revealAnswer }) {
           </div>
           <div className="text-green">{counter}</div>
           <div className="text-green"> score = {score}</div>
+          {/* <TwitterShareButton score = {score}
+    url={'https://final-project-sr23.herokuapp.com/'}
+    options={{ text: `score = {score}`, via: 'PressStartTrivia' }}
+  /> */}
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size='large' data-via="PressStartTrivia"
+          data-text= 'score'>Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
         </div>
       </div>
     </div>
