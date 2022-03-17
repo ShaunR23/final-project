@@ -15,7 +15,7 @@ class Question(models.Model):
     incorrectAnswer3 = models.CharField(max_length = 255, blank=True)
     correctAnswer = models.CharField(max_length = 255)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     phase = models.CharField(max_length=10, choices=PHASES, default='DRAFT')
 
 def __str__(self):

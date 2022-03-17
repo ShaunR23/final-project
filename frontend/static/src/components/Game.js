@@ -145,25 +145,7 @@ function Game(props, revealAnswer) {
   //           };
   //            fetch("/api/v1/score/", options);
   //   }
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-  window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-    
-    t._e = [];
-    t.ready = function(f) {
-    t._e.push(f);
-    };
-    
-    return t;
-    }(document, "script", "twitter-wjs"));
-  
 
   const gameOverScreen = () => (
     <div className=" w-screen h-screen flex justify-center items-center">
@@ -180,7 +162,7 @@ function Game(props, revealAnswer) {
     options={{ text: `score = {score}`, via: 'PressStartTrivia' }}
   /> */}
           <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size='large' data-via="PressStartTrivia"
-          data-text= 'score'>Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          data-text= 'score bbbbbbbbbbbbb'>Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
         </div>

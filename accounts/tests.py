@@ -25,3 +25,5 @@ class UserTests(TestCase):
         self.assertEqual(user.username, 'bruce')
         self.assertFalse(user.is_staff)
         self.assertTrue(user.is_active)
+
+    
