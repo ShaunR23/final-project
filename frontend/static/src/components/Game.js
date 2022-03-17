@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import Questions from "./Questions";
 import { handleError } from "../utils";
 import Leaderboard from "./Leaderboard";
+import ProfileView from "./ProfileView";
 import Cookies from "js-cookie";
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+
 
 
 
@@ -48,7 +50,7 @@ function CurrentQuestion({
   );
 }
 
-function Game(props, revealAnswer) {
+function Game(props, revealAnswer, twitterView) {
   const [questions, setQuestions] = useState(props.questions);
   const [counter, setCounter] = useState(15);
   const [gameOver, setGameOver] = useState(false);
@@ -116,7 +118,7 @@ function Game(props, revealAnswer) {
           setTotalAnswer(totalAnswer + 1);
           setQuestionCount(questionCount + 1);
           setIsCorrect(null);
-        }, 3000);
+        }, 2000);
       }
 
       return () => clearInterval(timer);
@@ -147,7 +149,7 @@ function Game(props, revealAnswer) {
   //   }
 
 
-  const gameOverScreen = () => (
+  const gameOverScreen = ({twitterView}) => (
     <div className=" w-screen h-screen flex justify-center items-center">
       <div className="container">
         <div id="question-container" className="hide">
@@ -157,12 +159,13 @@ function Game(props, revealAnswer) {
           </div>
           <div className="text-green">{counter}</div>
           <div className="text-green"> score = {score}</div>
-          {/* <TwitterShareButton score = {score}
+          <TwitterShareButton score = {score} rightAnswer = {rightAnswer} totalAnswer = {totalAnswer} twitterView = {twitterView} 
     url={'https://final-project-sr23.herokuapp.com/'}
-    options={{ text: `score = {score}`, via: 'PressStartTrivia' }}
-  /> */}
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size='large' data-via="PressStartTrivia"
-          data-text= 'score bbbbbbbbbbbbb'>Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    options={{ text: `score: ${score} You got ${rightAnswer} out of ${totalAnswer} correct`  
+    , via: 'PressStartTrivia' }}
+  />
+          {/* <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size='large' data-via="PressStartTrivia"
+          data-text= 'score bbbbbbbbbbbbb'>Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> */}
 
 
         </div>
@@ -189,8 +192,3 @@ Game.defaultProps = {
 
 export default Game;
 
-// function add(num1, num2) {
-//     return num1 + num2;
-// }
-
-// add(2, 34)

@@ -2,7 +2,9 @@ from .models import Profile
 from .serializers import ProfileSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.views import APIView
 from .permissions import isUserOnly
+
 
 class ProfileListAPIView(generics.ListCreateAPIView):
     queryset = Profile.objects.all()
@@ -26,3 +28,4 @@ class UserAccountDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (isUserOnly,)
+

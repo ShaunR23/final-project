@@ -2,29 +2,29 @@ import { useEffect, useState } from "react";
 import { handleError } from "../utils";
 
 function Leaderboard(props){
-    const [leaderboard, setLeaderBoard] = useState(props.leaderboard)
+    
 
-    useEffect(() => {
-        const getLeaderBoard = async () => {
-          const response = await fetch("/api/v1/leaderboard/").catch(handleError);
-          if (!response.ok) {
-            throw new Error("Network response was not OK!");
-          } else {
-            const data = await response.json();
-            setLeaderBoard(data);
-          }
-        };
-        getLeaderBoard();
-      }, []);
+    // useEffect(() => {
+    //     const getLeaderBoard = async () => {
+    //       const response = await fetch("/api/v1/leaderboard/").catch(handleError);
+    //       if (!response.ok) {
+    //         throw new Error("Network response was not OK!");
+    //       } else {
+    //         const data = await response.json();
+    //         setLeaderBoard(data);
+    //       }
+    //     };
+    //     getLeaderBoard();
+    //   }, []);
     
 
 return(
-<div className="flex flex-row">
+<div className="flex flex-row justify-content-center">
 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8  ">
 <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8 ">
 <div className="overflow-hidden shadow-md sm:rounded-lg">
 
-<table className="min-w-full m-20">
+<table className=" m-20">
 
 <thead className="bg-gray-50 dark:bg-gray-700">
 <h2 className = "justify-center">Normal</h2>
@@ -175,7 +175,7 @@ Accessories
 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8 ">
 <div className="overflow-hidden shadow-md sm:rounded-lg">
-<table className="min-w-full m-20">
+<table className="m-20">
 
 <thead className="bg-gray-50 dark:bg-gray-700">
 <h2 className = "justify-center">Normal</h2>

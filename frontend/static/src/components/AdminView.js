@@ -28,11 +28,13 @@ function AdminView(props){
             method: "POST",
             headers: {
               "X-CSRFToken": Cookies.get("csrftoken"),
+              "Content-Type": "application/json",
             },
+            body: JSON.stringify(questions),
           };
       
-          await fetch(`/api/v1/admin/${id}`, options);
-           return props.phase = 'ACCEPTED'
+          await fetch(`/api/v1/admin/${props.questions.id}`, options);
+           props.questions.phase = 'ACCEPTED'
 
       }
 

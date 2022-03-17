@@ -50,7 +50,7 @@ function Question({
         </Card.Body>
       </Card>
     </article>
-  );
+  )
 }
 
 function Questions(props) {
@@ -75,7 +75,7 @@ function Questions(props) {
 
   return (
     <div className="container content-row">
-      <div className="row">{questionList};</div>
+      <div className="row">{questionList}</div>
     </div>
   );
 }
