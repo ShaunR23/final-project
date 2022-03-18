@@ -161,7 +161,7 @@ function Game(props) {
           </div>
           <div className="text-green">{counter}</div>
           <div className="text-green"> score = {score}</div>
-          <TwitterShareButton score = {score} rightAnswer = {rightAnswer} totalAnswer = {totalAnswer} twitterView = {twitterView} 
+          <TwitterShareButton score = {score} rightAnswer = {rightAnswer} totalAnswer = {totalAnswer} 
     url={'https://final-project-sr23.herokuapp.com/'}
     options={{ text: `score: ${score} You got ${rightAnswer} out of ${totalAnswer} correct`  
     , via: 'PressStartTrivia' }}
