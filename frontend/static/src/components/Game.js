@@ -151,7 +151,7 @@ function Game(props) {
   //   }
 
 
-  const gameOverScreen = ({twitterView}) => (
+  const gameOverScreen = () => (
     <div className=" w-screen h-screen flex justify-center items-center">
       <div className="container">
         <div id="question-container" className="hide">
