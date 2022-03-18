@@ -63,13 +63,14 @@ INSTALLED_APPS = [
 
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
+    # 'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.twitter',
     'tweepy',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'dj_rest_auth.registration',
     
 
     'frontend.apps.FrontendConfig',

@@ -2,13 +2,14 @@ from django.test import TestCase, Client
 from .models import Question
 from urllib import response
 from rest_framework import status
+import json
 from django.urls import reverse
 from .serializers import QuestionSerializer
 
 
 client = Client()
 
-class ArticleTestModels(TestCase):
+class QuestionTestModels(TestCase):
     def setUp(self):
     
         Question.objects.create(
@@ -27,3 +28,12 @@ class ArticleTestModels(TestCase):
         self.assertEqual(questions.incorrectAnswer2, 'incorrect answer'),
         self.assertEqual(questions.incorrectAnswer3, 'incorrect answer'),
         self.assertEqual(questions.correctAnswer, 'correct answer')
+
+    # def test_create_question(self):
+    #     response = client.post(
+    #         reverse('trivia:'),
+    #          data=json.dumps(self.valid_payload),
+    #         content_type='application/json',
+    #     )
+
+    #     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

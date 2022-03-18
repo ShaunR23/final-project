@@ -4,7 +4,7 @@ import { handleError } from "../utils";
 import Leaderboard from "./Leaderboard";
 import ProfileView from "./ProfileView";
 import Cookies from "js-cookie";
-import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+import { TwitterTimelineEmbed, TwitterShareButton } from 'react-twitter-embed';
 
 
 
@@ -50,7 +50,7 @@ function CurrentQuestion({
   );
 }
 
-function Game(props, revealAnswer, twitterView) {
+function Game(props) {
   const [questions, setQuestions] = useState(props.questions);
   const [counter, setCounter] = useState(15);
   const [gameOver, setGameOver] = useState(false);
@@ -63,6 +63,7 @@ function Game(props, revealAnswer, twitterView) {
   
   const correct = "Correct!!";
   
+  const revealAnswer = `Wrong, the correct answer is ${props.correctAnswer}`;
   const handleAnswer = (value) => {
     setTimeout(() => {
       if (questionCount > 10) {
@@ -133,6 +134,7 @@ function Game(props, revealAnswer, twitterView) {
         handleAnswer={handleAnswer}
         counter={counter}
         score = {score}
+        
         
       />
     ));
