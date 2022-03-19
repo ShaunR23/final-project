@@ -5,6 +5,7 @@ import Leaderboard from "./Leaderboard";
 import ProfileView from "./ProfileView";
 import Cookies from "js-cookie";
 import { TwitterTimelineEmbed, TwitterShareButton } from 'react-twitter-embed';
+import { red } from "tailwindcss/colors";
 
 
 
@@ -32,16 +33,19 @@ function CurrentQuestion({
   
   return (
     <>
-      <div className=" w-screen h-screen flex justify-center items-center">
+      <div className=" w-screen h-screen flex items-center">
         <div className="container">
           <div id="question-container" className="hide">
+          
             <div id="question">{question}</div>
+            <span className="text-light-red flex justify-center text-3xl">{counter}</span>
             <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7">
               {answerButtons}
-              <div className="text-green">{counter}</div>
-              <div className="text-green"> score = {score}</div>
+              
+              
               {/* <div><{ isCorrect ? correct() : revealAnswer()}</div> */}
             </div>
+            <span className="text-white text-xl flex justify-center"> Score: {score}</span>
           </div>
         </div>
       </div>
@@ -58,14 +62,16 @@ function Game(props) {
   let [score, setScore] = useState(null);
   let [rightAnswer, setRightAnswer] = useState(null);
   let [totalAnswer, setTotalAnswer] = useState(null);
-  let [questionCount, setQuestionCount] = useState(null);
+  let [questionCount, setQuestionCount] = useState
+  (null);
+  
 
   
   const correct = "Correct!!";
   
   const revealAnswer = `Wrong, the correct answer is ${props.correctAnswer}`;
   const handleAnswer = (value) => {
-    setTimeout(() => {
+    
       if (questionCount > 10) {
         setGameOver(true);
       } else if (value == true) {
@@ -78,6 +84,7 @@ function Game(props) {
         setTotalAnswer(totalAnswer + 1);
         setQuestionCount(questionCount + 1);
         alert(correct);
+        
       } else {
         const updatedQuestions = [...questions];
         updatedQuestions.shift();
@@ -87,7 +94,7 @@ function Game(props) {
         setQuestionCount(questionCount + 1);
         alert(revealAnswer);
       }
-    }, 3000);
+    
   };
 
   useEffect(() => {
@@ -104,9 +111,9 @@ function Game(props) {
   }, []);
 
   useEffect(() => {
-    if (questionCount > 2) {
+    if (questionCount > 9) {
       setGameOver(true);
-    } else if (questionCount < 3) {
+    } else if (questionCount < 10) {
       let timer =
         counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
 
@@ -139,16 +146,16 @@ function Game(props) {
       />
     ));
 
-  //         const options = {
-  //             method: "POST",
-  //             headers: {
-  //                 'Accept': 'application/json',
-  //                 "X-CSRFToken": Cookies.get("csrftoken"),
-  //             },
-  //             body: JSON.stringify()
-  //           };
-  //            fetch("/api/v1/score/", options);
-  //   }
+    //       const options = {
+    //           method: "POST",
+    //           headers: {
+    //               'Accept': 'application/json',
+    //               "X-CSRFToken": Cookies.get("csrftoken"),
+    //           },
+    //           body: JSON.stringify()
+    //         };
+    //          fetch("/api/v1/score/", options);
+    // }
 
 
   const gameOverScreen = () => (

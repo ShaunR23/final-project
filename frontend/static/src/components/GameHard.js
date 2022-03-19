@@ -65,6 +65,7 @@ function Game(props) {
   
   const revealAnswer = `Wrong, the correct answer is ${props.correctAnswer}`;
   const handleAnswer = (value) => {
+      
     setTimeout(() => {
       if (questionCount > 10) {
         setGameOver(true);
@@ -79,11 +80,11 @@ function Game(props) {
         setQuestionCount(questionCount + 1);
         alert(correct);
       } else {
-        
+        setGameOver(true);
         setTotalAnswer(totalAnswer + 1);
         setQuestionCount(questionCount + 1);
         alert(revealAnswer);
-        setGameOver(true);
+        
       }
     }, 1000);
   };

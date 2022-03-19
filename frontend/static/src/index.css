@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -19,36 +20,61 @@ code {
   margin: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  
 }
 
-:root {
+/* :root {
   --hue-neutral: 200;
   --hue-wrong: 0;
   --hue-correct: 145;
-}
+} */
 
 .container {
   width: 800px;
   max-width: 80%;
-  background-color:#C0C0C0 ;
+  /* background-color:#C0C0C0 ; */
+  background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 0 10px 2px;
 }
 
-.btn {
+.home1, .home2 {
+  background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
+}
+
+
+.btn, .articleBtn {
   --hue: var(--hue-neutral);
   border: 1px solid green;
+  color: black;
   background-color: ;
   border-radius: 5px;
   padding: 5px 10px;
   border-width: medium;
  
-  outline: none;
+  outline: ;
 }
 
+.articleBtn2 {
+  --hue: var(--hue-neutral);
+  border: 1px solid red;
+  color: black;
+  background-color: ;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border-width: medium;
+ 
+}
+
+.article-cards {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+
 .btn:hover {
-  border-color: green;
+  border-color: white;
 }
 
 .btn.correct {
@@ -94,7 +120,9 @@ blockquote.twitter-tweet a:focus {
   text-decoration: underline;
 }
 
-
+.leaderboard {
+  background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
+}
 /* .hide {
   display: none;
 } */

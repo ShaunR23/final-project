@@ -66,10 +66,11 @@ function AdminView(props){
 
       const questionList = questions.map((question) => (
         <article
-        className="article-cards text-center col col-md-3"
+        className=" text-center col col-md-3 col-sm-1"
       key={question.id}
     >
-      <Card>
+    
+      <Card className = 'article-cards' >
         <h6>{question.question}</h6>
         <Card.Body>
           <p>{question.incorrectAnswer1}</p>
@@ -81,7 +82,7 @@ function AdminView(props){
             Accept
           </button> 
           <br></br>
-          <button className="articleBtn" variant="primary" onClick={() => handleDelete(question.id)}>
+          <button className="articleBtn2 mt-1" variant="primary" onClick={() => handleDelete(question.id)}>
             Delete
           </button>
         </Card.Body>
@@ -93,7 +94,7 @@ function AdminView(props){
 
 return(
     <div className="container content-row">
-    <div className="row">{questionList};</div>
+    <div className="row">{questionList}</div>
   </div>
     
 )

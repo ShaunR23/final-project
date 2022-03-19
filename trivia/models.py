@@ -24,10 +24,16 @@ def __str__(self):
 class Score(models.Model):
 
     score = models.IntegerField()
+    score_hard = models.IntegerField(default=0)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
+    # def __str__(self):
+    #     return self.user
+    # def natural_key(self):
+    #     return (self.user)
+
+    def __unicode__(self):
         return self.user
 
 

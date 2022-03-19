@@ -22,7 +22,7 @@ function Register(props) {
     console.log(err);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async () => {
   
 
     if (state.password1 !== state.password2) {

@@ -67,7 +67,7 @@ function QuestionForm(props) {
   };
 
   return (
-    <div className="bg-gray-lighter h-screen font-sans">
+    <div className="h-screen font-sans">
       <div className="container mx-auto h-full flex justify-center items-center">
         <div className="">
           <form onSubmit={state.id ? handleUpdate : handleSubmit}>
@@ -156,7 +156,7 @@ function QuestionForm(props) {
             <button
               type="submit"
               onClick={() => setPhase("DRAFT")}
-              className="text-white bg-dark-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center dark:bg-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center dark:bg-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Save
             </button>

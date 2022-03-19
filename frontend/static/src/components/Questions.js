@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { handleError } from "../utils";
 import { Card, Button, Modal } from "react-bootstrap";
 import QuestionForm from "./QuestionForm";
+import Cookies from "js-cookie";
 
 function Question({
   incorrectAnswer1,
@@ -10,14 +11,40 @@ function Question({
   question,
   correctAnswer,
   phase,
+  
 }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [view, setView] = useState(null);
+
+  const handleDelete = async (id) => {
+       
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    };
+
+    const response = await fetch(`/api/v1/user/trivia/${id}`, options).catch(
+      handleError
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+
+    const viewAfterDelete = view.filter((question) => {
+      return question.id !== id;
+    });
+    setView(viewAfterDelete);
+  };
 
   return (
     <article className="text-center col col-md-3">
-      <Card>
+      <Card className = 'article-cards'>
         <h6>{question}</h6>
         <Card.Body>
           <p>{incorrectAnswer1}</p>
@@ -40,13 +67,13 @@ function Question({
               Close
             </Button>
           </Modal>
-          <Button
-            className="questionBtn"
-            variant="primary"
-            onClick={handleShow}
-          >
+          <button className="articleBtn" variant="primary" onClick= {handleShow}>
             Edit
-          </Button>
+          </button> 
+          <br></br>
+          {/* <button className="articleBtn2 mt-1" variant="primary" onClick={() => handleDelete(question.id)}>
+            Delete
+          </button> */}
         </Card.Body>
       </Card>
     </article>
