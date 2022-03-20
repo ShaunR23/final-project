@@ -3,7 +3,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from .models import  Question, Score
 from .serializers import  QuestionSerializer, UserQuestionSerializer, QuestionAdminSerializer, ScoreSerializer
-from .permissions import IsAuthorOrReadOnly
+from .permissions import IsAuthorOrReadOnly, IsUserOrReadOnly
 
 class QuestionListAPIView(generics.ListAPIView):
     serializer_class = QuestionSerializer
@@ -65,4 +65,19 @@ class ScoreListAPIView(generics.ListAPIView):
     serializer_class = ScoreSerializer
     def get_queryset(self):
         return Score.objects.all()
+    
+    def perform_create(self, serializer):
+        serializer.save(self.request.user)
+
+
+class UserScoreDetailListAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsUserOrReadOnly,)
+    serializer_class = ScoreSerializer
+    
+
+    def get_queryset(self):
+        return Score.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(self.request.user)
 

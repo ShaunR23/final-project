@@ -21,6 +21,7 @@ code {
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   
+  
 }
 
 /* :root {
@@ -30,8 +31,8 @@ code {
 } */
 
 .container {
-  width: 800px;
-  max-width: 80%;
+  /* width: 800px; */
+  max-width: 90%;
   /* background-color:#C0C0C0 ; */
   background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
   border-radius: 5px;
@@ -131,3 +132,11 @@ blockquote.twitter-tweet a:focus {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .leaderboard-table{
+    display: flex;
+    flex-direction: column;
+  }
+
+}

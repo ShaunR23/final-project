@@ -4,11 +4,8 @@ import { handleError } from "../utils";
 import Leaderboard from "./Leaderboard";
 import ProfileView from "./ProfileView";
 import Cookies from "js-cookie";
-import { TwitterTimelineEmbed, TwitterShareButton } from 'react-twitter-embed';
+import { TwitterTimelineEmbed, TwitterShareButton } from "react-twitter-embed";
 import { red } from "tailwindcss/colors";
-
-
-
 
 function CurrentQuestion({
   isCorrect,
@@ -20,7 +17,7 @@ function CurrentQuestion({
   question,
   correctAnswer,
 }) {
-    const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
+  const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
   const answerButtons = shuffled_answers.map((answer) => {
     const key = Object.keys(answer)[0];
     return (
@@ -30,22 +27,24 @@ function CurrentQuestion({
     );
   });
 
-  
   return (
     <>
       <div className=" w-screen h-screen flex items-center">
         <div className="container">
           <div id="question-container" className="hide">
-          
             <div id="question">{question}</div>
-            <span className="text-light-red flex justify-center text-3xl">{counter}</span>
+            <span className="text-light-red flex justify-center text-3xl">
+              {counter}
+            </span>
             <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7">
               {answerButtons}
-              
-              
+
               {/* <div><{ isCorrect ? correct() : revealAnswer()}</div> */}
             </div>
-            <span className="text-white text-xl flex justify-center"> Score: {score}</span>
+            <span className="text-white text-xl flex justify-center">
+              {" "}
+              Score: {score}
+            </span>
           </div>
         </div>
       </div>
@@ -62,39 +61,33 @@ function Game(props) {
   let [score, setScore] = useState(null);
   let [rightAnswer, setRightAnswer] = useState(null);
   let [totalAnswer, setTotalAnswer] = useState(null);
-  let [questionCount, setQuestionCount] = useState
-  (null);
-  
+  let [questionCount, setQuestionCount] = useState(null);
 
-  
   const correct = "Correct!!";
-  
+
   const revealAnswer = `Wrong, the correct answer is ${props.correctAnswer}`;
   const handleAnswer = (value) => {
-    
-      if (questionCount > 10) {
-        setGameOver(true);
-      } else if (value == true) {
-        const updatedQuestions = [...questions];
-        updatedQuestions.shift();
-        setQuestions(updatedQuestions);
-        setCounter(15);
-        setScore((score += counter));
-        setRightAnswer(rightAnswer + 1);
-        setTotalAnswer(totalAnswer + 1);
-        setQuestionCount(questionCount + 1);
-        alert(correct);
-        
-      } else {
-        const updatedQuestions = [...questions];
-        updatedQuestions.shift();
-        setQuestions(updatedQuestions);
-        setCounter(15);
-        setTotalAnswer(totalAnswer + 1);
-        setQuestionCount(questionCount + 1);
-        alert(revealAnswer);
-      }
-    
+    if (questionCount > 10) {
+      setGameOver(true);
+    } else if (value == true) {
+      const updatedQuestions = [...questions];
+      updatedQuestions.shift();
+      setQuestions(updatedQuestions);
+      setCounter(15);
+      setScore((score += counter));
+      setRightAnswer(rightAnswer + 1);
+      setTotalAnswer(totalAnswer + 1);
+      setQuestionCount(questionCount + 1);
+      alert(correct);
+    } else {
+      const updatedQuestions = [...questions];
+      updatedQuestions.shift();
+      setQuestions(updatedQuestions);
+      setCounter(15);
+      setTotalAnswer(totalAnswer + 1);
+      setQuestionCount(questionCount + 1);
+      alert(revealAnswer);
+    }
   };
 
   useEffect(() => {
@@ -140,43 +133,56 @@ function Game(props) {
         {...question}
         handleAnswer={handleAnswer}
         counter={counter}
-        score = {score}
-        
-        
+        score={score}
       />
     ));
+  const handleSubmitScore = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    };
 
-    //       const options = {
-    //           method: "POST",
-    //           headers: {
-    //               'Accept': 'application/json',
-    //               "X-CSRFToken": Cookies.get("csrftoken"),
-    //           },
-    //           body: JSON.stringify()
-    //         };
-    //          fetch("/api/v1/score/", options);
-    // }
+    const response = await fetch(`/api/v1/score/`, options).catch(handleError);
 
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+  };
 
   const gameOverScreen = () => (
     <div className=" w-screen h-screen flex justify-center items-center">
-      <div className="container">
-        <div id="question-container" className="hide">
+      <div className="container flex justify-center">
+        <div id="question-container" className="hide ">
           <div id="question"></div>
-          <div>
-            Correct Answers = {rightAnswer}: Total Questions {totalAnswer}: score = {score}
-          </div>
-          <div className="text-green">{counter}</div>
-          <div className="text-green"> score = {score}</div>
-          <TwitterShareButton score = {score} rightAnswer = {rightAnswer} totalAnswer = {totalAnswer} 
-    url={'https://final-project-sr23.herokuapp.com/'}
-    options={{ text: `score: ${score} You got ${rightAnswer} out of ${totalAnswer} correct`  
-    , via: 'PressStartTrivia' }}
-  />
-          {/* <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size='large' data-via="PressStartTrivia"
-          data-text= 'score bbbbbbbbbbbbb'>Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> */}
-
-
+          <div className = 'leading-10 text-white mb-3' >
+            You got {rightAnswer} of {totalAnswer} correct!! <br></br>
+            Score: {score}
+            </div>
+          {/* <div className="text-green">{counter}</div>
+          <div className="text-green"> score = {score}</div> */}
+          <TwitterShareButton
+            
+            score={score}
+            rightAnswer={rightAnswer}
+            totalAnswer={totalAnswer}
+            url={"https://final-project-sr23.herokuapp.com/"}
+            options={{
+              text: `score: ${score} You got ${rightAnswer} out of ${totalAnswer} correct`,
+              via: "PressStartTrivia", size: 'large', 
+            }}
+          />
+          
+          {/* <button
+            className="articleBtn mt-2 p-1"
+            variant="primary"
+            onClick={handleSubmitScore}
+          >
+            Submit Score
+          </button> */}
+          
         </div>
       </div>
     </div>
@@ -200,4 +206,3 @@ Game.defaultProps = {
 };
 
 export default Game;
-
