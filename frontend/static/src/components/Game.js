@@ -17,7 +17,7 @@ function CurrentQuestion({
   question,
   correctAnswer,
 }) {
-  const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
+//   const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
   const answerButtons = shuffled_answers.map((answer) => {
     const key = Object.keys(answer)[0];
     return (
@@ -64,8 +64,8 @@ function Game(props) {
   let [questionCount, setQuestionCount] = useState(null);
 
   const correct = "Correct!!";
-
-  const revealAnswer = `Wrong, the correct answer is ${props.correctAnswer}`;
+    
+  const revealAnswer = `Wrong, the correct answer is ${questions.correctAnswer}`;
   const handleAnswer = (value) => {
     if (questionCount > 10) {
       setGameOver(true);
@@ -118,6 +118,7 @@ function Game(props) {
           setCounter(15);
           setTotalAnswer(totalAnswer + 1);
           setQuestionCount(questionCount + 1);
+          alert(revealAnswer)
           setIsCorrect(null);
         }, 2000);
       }

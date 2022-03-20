@@ -55,7 +55,7 @@ function Game(props) {
   const [counter, setCounter] = useState(15);
   const [gameOver, setGameOver] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  let [score, setScore] = useState(null);
+  let [score_hard, setScore_hard] = useState(null);
   let [rightAnswer, setRightAnswer] = useState(null);
   let [totalAnswer, setTotalAnswer] = useState(null);
   let [questionCount, setQuestionCount] = useState(null);
@@ -74,7 +74,7 @@ function Game(props) {
         updatedQuestions.shift();
         setQuestions(updatedQuestions);
         setCounter(15);
-        setScore((score += counter));
+        setScore_hard((score_hard += counter));
         setRightAnswer(rightAnswer + 1);
         setTotalAnswer(totalAnswer + 1);
         setQuestionCount(questionCount + 1);
@@ -134,7 +134,7 @@ function Game(props) {
         {...question}
         handleAnswer={handleAnswer}
         counter={counter}
-        score = {score}
+        score_hard = {score_hard}
         
         
       />
@@ -158,13 +158,13 @@ function Game(props) {
         <div id="question-container" className="hide">
           <div id="question"></div>
           <div>
-            Correct Answers = {rightAnswer}: Total Questions {totalAnswer}: score = {score}
+            Correct Answers = {rightAnswer}: Total Questions {totalAnswer}: score = {score_hard}
           </div>
           <div className="text-green">{counter}</div>
-          <div className="text-green"> score = {score}</div>
-          <TwitterShareButton score = {score} rightAnswer = {rightAnswer} totalAnswer = {totalAnswer} 
+          <div className="text-green"> score_hard = {score_hard}</div>
+          <TwitterShareButton score_hard = {score.hard} rightAnswer = {rightAnswer} totalAnswer = {totalAnswer} 
     url={'https://final-project-sr23.herokuapp.com/'}
-    options={{ text: `score: ${score} You got ${rightAnswer} out of ${totalAnswer} correct`  
+    options={{ text: `score: ${score_hard} You got ${rightAnswer} out of ${totalAnswer} correct`  
     , via: 'PressStartTrivia' }}
   />
           {/* <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size='large' data-via="PressStartTrivia"
@@ -176,7 +176,7 @@ function Game(props) {
     </div>
   );
   console.log(counter);
-  console.log(score);
+  console.log(score_hard);
   console.log(trivia);
   console.log(rightAnswer);
   console.log(totalAnswer);

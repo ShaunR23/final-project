@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 };
 
 function QuestionForm(props) {
-  const [phase, setPhase] = useState("");
+  const [phase, setPhase] = useState("state.phase");
   const [state, setState] = useState({ ...props });
 
   const handleInput = (e) => {
@@ -63,7 +63,7 @@ function QuestionForm(props) {
       body: formData,
     };
 
-    await fetch(`/api/v1/user/trivia/${state.id}`, options.catch(handleError));
+    await fetch(`/api/v1/user/trivia/${state.id}/`, options.catch(handleError));
   };
 
   return (

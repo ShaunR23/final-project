@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'whitenoise.runserver_nostatic',
 
+    "corsheaders",
     'allauth',
     'allauth.account',
     # 'rest_auth.registration',
@@ -87,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -180,7 +182,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-SITE_ID = 1
+SITE_ID = 2
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
@@ -191,3 +193,5 @@ REST_AUTH_SERIALIZERS = {
 # https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+TWITTER_URL_CALLBACK = 'http://127.0.0.1:8000/'

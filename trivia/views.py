@@ -70,7 +70,7 @@ class ScoreListAPIView(generics.ListAPIView):
         serializer.save(self.request.user)
 
 class UserScoreListAPIView(generics.ListCreateAPIView):
-    permission_classes = (IsUserOrReadOnly,)
+    
     serializer_class = ScoreSerializer
     
 
@@ -83,7 +83,7 @@ class UserScoreListAPIView(generics.ListCreateAPIView):
 
 
 class UserScoreDetailListAPIView(generics.RetrieveUpdateDestroyAPIView):
-    # permission_classes = (IsUserOrReadOnly,)
+    
     serializer_class = ScoreSerializer
     
 

@@ -44,13 +44,13 @@ function Question({
 
   return (
     <article className="text-center col col-md-3">
-      <Card className = 'article-cards'>
-        <h6>{question}</h6>
+      <Card className = 'article-cards font-serif'>
+        <h6 className='font-serif'>{question}</h6>
         <Card.Body>
-          <p>{incorrectAnswer1}</p>
-          <p>{incorrectAnswer2}</p>
-          <p>{incorrectAnswer3}</p>
-          <p>Correct Answer = {correctAnswer}</p>
+          <p className='font-serif'>{incorrectAnswer1}</p>
+          <p className='font-serif'>{incorrectAnswer2}</p>
+          <p className='font-serif'>{incorrectAnswer3}</p>
+          <p className='font-serif'>Correct Answer = {correctAnswer}</p>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Body>

@@ -11,70 +11,67 @@ scores
 }) {
 console.log(score)
 
-
-    
-
   return( 
 <>
 <div></div>
 <h2 className='flex justify-center text-2xl font-semibold font-serif tex-decoration-line: underline mt-3'>Normal</h2>
 <div className='flex justify-center mt-3'>
 
-<table class="items-center shadow-lg border-collapse container">
+<table className="items-center shadow-lg border-collapse container">
   <tr>
-    <th class=" border text-left px-8 py-4">Rank</th>
-    <th class=" border text-left px-8 py-4">User</th>
-    <th class=" border text-left px-8 py-4">Score</th>
+    <th className=" border text-left px-8 py-4">Rank</th>
+    <th className=" border text-left px-8 py-4">User</th>
+    <th className=" border text-left px-8 py-4">Score</th>
   </tr>
   <tr>
-    <td class="border px-8 py-4">1</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">1</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">2</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">2</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">3</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">3</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">4</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">4</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">5</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">5</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">6</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">6</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">7</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">7</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">8</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">8</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">9</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">9</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">10</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">10</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   </table>
 </div>
@@ -82,61 +79,61 @@ console.log(score)
 <h2 className='flex justify-center text-2xl font-semibold font-serif tex-decoration-line: underline mt-3'>Survivor</h2>
 <div className='flex justify-center mt-3'>
 
-<table class="items-center shadow-lg border-collapse container">
+<table className="items-center shadow-lg border-collapse container">
   <tr>
-    <th class=" border text-left px-8 py-4">Rank</th>
-    <th class=" border text-left px-8 py-4">User</th>
-    <th class=" border text-left px-8 py-4">Score</th>
+    <th className=" border text-left px-8 py-4">Rank</th>
+    <th className=" border text-left px-8 py-4">User</th>
+    <th className=" border text-left px-8 py-4">Score</th>
   </tr>
   <tr>
-    <td class="border px-8 py-4">1</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">1</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">2</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">2</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">3</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">3</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">4</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">4</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">5</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">5</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">6</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">6</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">7</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">7</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">8</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">8</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">9</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">9</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   <tr>
-    <td class="border px-8 py-4">10</td>
-    <td class="border px-8 py-4">{user}</td>
-    <td class="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">10</td>
+    <td className="border px-8 py-4">{user}</td>
+    <td className="border px-8 py-4">{score}</td>
   </tr>
   </table>
 </div>

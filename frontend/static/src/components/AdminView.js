@@ -8,6 +8,8 @@ function AdminView(props){
     const [questions, setQuestions] = useState(props.questions);
     const [view, setView] = useState(null);
     const [phase, setPhase] = useState();
+
+    
     
     useEffect(() => {
         const getQuestions = async () => {
@@ -33,8 +35,8 @@ function AdminView(props){
             body: JSON.stringify(questions),
           };
       
-          await fetch(`/api/v1/admin/${props.questions.id}`, options);
-           props.questions.phase = 'ACCEPTED'
+          await fetch(`/api/v1/admin/${id}`, options);
+           questions.phase = 'ACCEPTED'
 
       }
 
@@ -66,17 +68,17 @@ function AdminView(props){
 
       const questionList = questions.map((question) => (
         <article
-        className=" text-center col col-md-3 col-sm-1"
+        className=" text-center col col-md-3 "
       key={question.id}
     >
     
       <Card className = 'article-cards' >
-        <h6>{question.question}</h6>
+        <h6 className='font-serif' >{question.question}</h6>
         <Card.Body>
-          <p>{question.incorrectAnswer1}</p>
-          <p>{question.incorrectAnswer2}</p>
-          <p>{question.incorrectAnswer3}</p>
-          <p>Correct Answer = {question.correctAnswer}</p>
+          <p className='font-serif'>{question.incorrectAnswer1}</p>
+          <p className='font-serif'>{question.incorrectAnswer2}</p>
+          <p className='font-serif'>{question.incorrectAnswer3}</p>
+          <p className='font-serif'>Correct Answer = {question.correctAnswer}</p>
 
           <button className="articleBtn" variant="primary" onClick={() => publishQuestion(question.id)}>
             Accept

@@ -1,14 +1,15 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useSearchParams } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 const INITIAL_STATE = {
   username: "",
   password: "",
 };
-function Login(props) {
+function Login() {
   const { navigate, setAuth, setAdmin } = useOutletContext();
-
+  let [searchParams] = useSearchParams();
 
   const [state, setState] = useState(INITIAL_STATE);
 
@@ -26,7 +27,6 @@ function Login(props) {
   };
 
   const handleSubmit = async (event) => {
-
     const options = {
       method: "POST",
       headers: {
@@ -51,6 +51,48 @@ function Login(props) {
     setState(INITIAL_STATE);
     navigate("/", { replace: true });
   };
+
+  const twitterAuth = async () => {
+    const response = await fetch("/accounts/twitter/request_token/", {
+      method: "GET",
+    });
+
+    const json = await response.json();
+    const oauth_token = json["oauth_token"];
+    window.location.replace(
+      `https://api.twitter.com/oauth/authorize?oauth_token=${oauth_token}`
+    );
+  };
+
+  const twitterReceiveCallback = async () => {
+    const oauth_token = searchParams.get("oauth_token");
+    const oauth_verifier = searchParams.get("oauth_verifier");
+
+    const response = await fetch(
+      `/accounts/twitter/login/callback/?oauth_token=${oauth_token}&oauth_verifier=${oauth_verifier}`,
+      {
+        method: "GET",
+      }
+    );
+
+    console.log("response", response);
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
+    navigate("/", { replace: true });
+  };
+
+  const oauth_token = searchParams.get("oauth_token");
+
+  if (oauth_token) {
+    twitterReceiveCallback();
+
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
+  }
 
   return (
     <div className="bg-gray-lighter h-screen font-sans">
@@ -105,11 +147,19 @@ function Login(props) {
 
             <div className="flex justify-center">
               <button
-              id = "login-submit"
+                id="login-submit"
                 type="submit"
                 className="text-dark-green font-bold py-2 px-4 rounded border border-dark-green"
               >
                 Login
+              </button>
+
+              <button
+                className="text-dark-green font-bold py-2 px-4 rounded border border-dark-green"
+                type="button"
+                onClick={twitterAuth}
+              >
+                Sign in with Twitter
               </button>
 
               {/* <a

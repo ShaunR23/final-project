@@ -15,6 +15,7 @@ django-rest-allauth = "*"
 django-permissions = "*"
 pillow = "*"
 dj-rest-auth = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 autopep8 = "*"

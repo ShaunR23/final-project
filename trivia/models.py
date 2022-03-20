@@ -33,8 +33,8 @@ class Score(models.Model):
     # def natural_key(self):
     #     return (self.user)
 
-    def __unicode__(self):
-        return self.user
+    # def __unicode__(self):
+    #     return self.user
 
 
 
