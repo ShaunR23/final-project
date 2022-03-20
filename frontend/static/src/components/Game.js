@@ -145,7 +145,7 @@ function Game(props) {
       },
     };
 
-    const response = await fetch(`/api/v1/score/`, options).catch(handleError);
+    const response = await fetch(`/api/v1/user/score/`, options).catch(handleError);
 
     if (!response.ok) {
       throw new Error("Network response was not OK");
@@ -170,18 +170,18 @@ function Game(props) {
             totalAnswer={totalAnswer}
             url={"https://final-project-sr23.herokuapp.com/"}
             options={{
-              text: `score: ${score} You got ${rightAnswer} out of ${totalAnswer} correct`,
+              text: `You got ${rightAnswer} out of ${totalAnswer} correct for a score of ${score}`,
               via: "PressStartTrivia", size: 'large', 
             }}
           />
           
-          {/* <button
+          <button
             className="articleBtn mt-2 p-1"
             variant="primary"
             onClick={handleSubmitScore}
           >
             Submit Score
-          </button> */}
+          </button>
           
         </div>
       </div>

@@ -69,15 +69,28 @@ class ScoreListAPIView(generics.ListAPIView):
     def perform_create(self, serializer):
         serializer.save(self.request.user)
 
-
-class UserScoreDetailListAPIView(generics.ListCreateAPIView):
+class UserScoreListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsUserOrReadOnly,)
     serializer_class = ScoreSerializer
     
 
     def get_queryset(self):
-        return Score.objects.all()
+        return Score.objects.filter(user = self.request.user.id)
+
 
     def perform_create(self, serializer):
-        serializer.save(self.request.user)
+        serializer.save(user = self.request.user)
+
+
+class UserScoreDetailListAPIView(generics.RetrieveUpdateDestroyAPIView):
+    # permission_classes = (IsUserOrReadOnly,)
+    serializer_class = ScoreSerializer
+    
+
+    def get_queryset(self):
+        return Score.objects.filter(user= self.request.user.id)
+
+
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
 
