@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { handleError } from "../utils";
 
 function Score ({
+props,
 score,
 score_hard,
 user,
@@ -9,7 +10,7 @@ username,
 scoreList,
 scores
 }) {
-console.log(score)
+console.log(scores)
 
   return( 
 <>
@@ -163,7 +164,7 @@ function Leaderboard(props){
       const scoreList = scores.map((score) => (
         <Score key={score.user} {...score} scores = {scores}  />
       ))
-console.log(scoreList.score)
+
     
 return( 
 <div>{scoreList[0]}</div>

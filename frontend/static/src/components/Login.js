@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   username: "",
   password: "",
 };
-function Login() {
+function Login({match}) {
   const { navigate, setAuth, setAdmin } = useOutletContext();
   let [searchParams] = useSearchParams();
 
@@ -79,7 +79,7 @@ function Login() {
     if (!response.ok) {
       throw new Error("Something went wrong!");
     }
-    navigate("/", { replace: true });
+    navigate("/welcome", { replace: true });
   };
 
   const oauth_token = searchParams.get("oauth_token");
