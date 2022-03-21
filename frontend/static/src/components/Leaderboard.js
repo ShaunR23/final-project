@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { handleError } from "../utils";
 
-function Score ({
-props,
-score,
-score_hard,
-user,
-username,
-scoreList,
-scores
-}) {
-console.log(scores)
+function Score (props, {user, score}){
+const [scores, setScores] = useState(props.scores)
+ 
+console.log(scores[1].score)
 
   return( 
 <>
@@ -26,8 +20,8 @@ console.log(scores)
   </tr>
   <tr>
     <td className="border px-8 py-4">1</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{scores[0].user}</td>
+    <td className="border px-8 py-4">{scores[0].score}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">2</td>
@@ -165,7 +159,8 @@ function Leaderboard(props){
         <Score key={score.user} {...score} scores = {scores}  />
       ))
 
-    
+    console.log({...scores[0]})
+    console.log({scores})
 return( 
 <div>{scoreList[0]}</div>
 )
