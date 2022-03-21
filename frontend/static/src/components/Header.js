@@ -153,7 +153,7 @@ function Header({isAuth, isAdmin, handleLogout }) {
 
               <NavLink
                 className="navLinks"
-                to="/admin"
+                to="/admin-view"
                 href="#"
                 className="block py-2 pr-4 pl-3 text-white hover:text-green hover:bg-light-blue md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
               >

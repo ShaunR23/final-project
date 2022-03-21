@@ -5,7 +5,15 @@ function Score (props, {user, score}){
 const [scores, setScores] = useState(props.scores)
  
 console.log(scores[1].score)
+console.log(scores)
+let sortedScores = scores.sort((a, b) => {
+  return b.score - a.score;
+});
 
+let sortedScoresHard = scores.sort((a, b) => {
+  return b.score_hard - a.score_hard;
+});
+console.log(sortedScores)
   return( 
 <>
 <div></div>
@@ -20,54 +28,31 @@ console.log(scores[1].score)
   </tr>
   <tr>
     <td className="border px-8 py-4">1</td>
-    <td className="border px-8 py-4">{scores[0].user}</td>
-    <td className="border px-8 py-4">{scores[0].score}</td>
+    <td className="border px-8 py-4">{sortedScores[0].user}</td>
+    <td className="border px-8 py-4">{sortedScores[0].score}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">2</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScores[1].user}</td>
+    <td className="border px-8 py-4">{sortedScores[1].score}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">3</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScores[2].user}</td>
+    <td className="border px-8 py-4">{sortedScores[2].score}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">4</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScores[3].user}</td>
+    <td className="border px-8 py-4">{sortedScores[3].score}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">5</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScores[4].user}</td>
+    <td className="border px-8 py-4">{sortedScores[4].score}</td>
   </tr>
-  <tr>
-    <td className="border px-8 py-4">6</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">7</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">8</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">9</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">10</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
+  
+    
   </table>
 </div>
 
@@ -82,53 +67,28 @@ console.log(scores[1].score)
   </tr>
   <tr>
     <td className="border px-8 py-4">1</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[0].user}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[0].score_hard}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">2</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[1].user}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[1].score_hard}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">3</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[2].user}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[2].score_hard}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">4</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[3].user}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[3].score_hard}</td>
   </tr>
   <tr>
     <td className="border px-8 py-4">5</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">6</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">7</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">8</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">9</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
-  </tr>
-  <tr>
-    <td className="border px-8 py-4">10</td>
-    <td className="border px-8 py-4">{user}</td>
-    <td className="border px-8 py-4">{score}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[4].user}</td>
+    <td className="border px-8 py-4">{sortedScoresHard[4].score_hard}</td>
   </tr>
   </table>
 </div>
@@ -159,7 +119,7 @@ function Leaderboard(props){
         <Score key={score.user} {...score} scores = {scores}  />
       ))
 
-    console.log({...scores[0]})
+    
     console.log({scores})
 return( 
 <div>{scoreList[0]}</div>

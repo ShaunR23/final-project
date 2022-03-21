@@ -26,7 +26,7 @@ ReactDOM.render(
         <Route path="login" element={<Login />} />
         <Route path="question-form" element={<QuestionForm />} />
         <Route path="question-list" element={<Questions />} />
-        <Route path="admin" element={<AdminView />} />
+        <Route path="admin-view" element={<AdminView />} />
         <Route path="game" element={<Game />} />
         <Route path="game-hard" element={<GameHard />} />
         <Route path="home" element={<Home />} />

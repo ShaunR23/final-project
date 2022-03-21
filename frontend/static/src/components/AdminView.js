@@ -13,7 +13,7 @@ function AdminView(props){
     
     useEffect(() => {
         const getQuestions = async () => {
-          const response = await fetch("/api/v1/admin/").catch(handleError);
+          const response = await fetch("/api/v1/admin-view/").catch(handleError);
           if (!response.ok) {
             throw new Error("Network response was not OK!");
           } else {
@@ -52,7 +52,7 @@ function AdminView(props){
               },
             };
         
-            const response = await fetch(`/api/v1/admin/${id}`, options).catch(
+            const response = await fetch(`/api/v1/admin-view/${id}`, options).catch(
               handleError
             );
         
