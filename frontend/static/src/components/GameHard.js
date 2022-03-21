@@ -165,7 +165,7 @@ function Game(props) {
           <TwitterShareButton score_hard = {score.hard} rightAnswer = {rightAnswer} totalAnswer = {totalAnswer} 
     url={'https://final-project-sr23.herokuapp.com/'}
     options={{ text: `score: ${score_hard} You got ${rightAnswer} out of ${totalAnswer} correct`  
-    , via: 'PressStartTrivia' }}
+    , via: 'PressStartTrivia', redirect_uri= 'https://final-project-sr23.herokuapp.com/' }}
   />
           {/* <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-size='large' data-via="PressStartTrivia"
           data-text= 'score bbbbbbbbbbbbb'>Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> */}

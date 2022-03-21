@@ -1,7 +1,8 @@
 import random
-
+from django.forms import ValidationError
 from rest_framework import serializers
 from .models import Question, Score
+from datetime import date, datetime
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -19,6 +20,10 @@ class QuestionSerializer(serializers.ModelSerializer):
         random.shuffle(answers)
         return answers
 
+    # def clean(self):
+    #     if self.date == date.today():
+    #         raise ValidationError("You've played your round for today.")
+
 
 class UserQuestionSerializer(serializers.ModelSerializer):
     author_username = serializers.ReadOnlyField(source='author.username')
@@ -35,6 +40,7 @@ class QuestionAdminSerializer(serializers.ModelSerializer):
         model = Question
         fields = '__all__'
 
+
 class ScoreSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -42,5 +48,5 @@ class ScoreSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
     def get_highest_score(self, obj):
-        obj.score.sort(reverse = True)
-
+        highScores = obj.score.sort(reverse=True)
+        return highScores

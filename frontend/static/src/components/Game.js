@@ -59,12 +59,12 @@ function Game(props) {
   const [gameOver, setGameOver] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   let [score, setScore] = useState(null);
-//   const [scores, setScores] = useState(props.scores) 
+  const [scores, setScores] = useState(props.scores);
   let [rightAnswer, setRightAnswer] = useState(null);
   let [totalAnswer, setTotalAnswer] = useState(null);
   let [questionCount, setQuestionCount] = useState(null);
-
-console.log(props.scores)
+  const [state, setState] = useState({ ...props });
+  console.log(scores);
 
   const correct = "Correct!!";
   const revealAnswer = `Wrong, the correct answer is ${questions.correctAnswer}`;
@@ -105,37 +105,38 @@ console.log(props.scores)
     getQuestions();
   }, []);
 
-//   useEffect(() => {
-//     const getScores = async () => {
-//       const response = await fetch("/api/v1/score/").catch(handleError);
-//       if (!response.ok) {
-//         throw new Error("Network response was not OK!");
-//       } else {
-//         const data = await response.json();
-//         setScores(data);
-//       }
-//     };
-//     getScores();
-//   }, []);
-
   useEffect(() => {
-    if (questionCount > 9) {
+    const getScores = async () => {
+      const response = await fetch("/api/v1/score/").catch(handleError);
+      if (!response.ok) {
+        throw new Error("Network response was not OK!");
+      } else {
+        const data = await response.json();
+        setScores(data);
+      }
+    };
+    getScores();
+  }, []);
+
+  // Post score at end of game
+  useEffect(() => {
+    if (questionCount > 1) {
       setGameOver(true);
+
       const options = {
         method: "POST",
         headers: {
           "Content-type": "application/json",
           "X-CSRFToken": Cookies.get("csrftoken"),
         },
+        body: JSON.stringify({ score }),
       };
-  
-      const response =  fetch(`/api/v1/user/score/`, options).catch(
-        handleError
-      );
-  
-      if (!response.ok) {
-        throw new Error("Network response was not OK");
-      }
+
+      const response = fetch(`/api/v1/user/score/`, options).catch(handleError);
+
+    //   if (!response.ok) {
+    //     throw new Error("Network response was not OK");
+    //   }
     } else if (questionCount < 10) {
       let timer =
         counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
@@ -167,23 +168,23 @@ console.log(props.scores)
         score={score}
       />
     ));
-//   const handleSubmitScore = async () => {
-//     const options = {
-//       method: "POST",
-//       headers: {
-//         "Content-type": "application/json",
-//         "X-CSRFToken": Cookies.get("csrftoken"),
-//       },
-//     };
+  //   const handleSubmitScore = async () => {
+  //     const options = {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //         "X-CSRFToken": Cookies.get("csrftoken"),
+  //       },
+  //     };
 
-//     const response = await fetch(`/api/v1/user/score/`, options).catch(
-//       handleError
-//     );
+  //     const response = await fetch(`/api/v1/user/score/`, options).catch(
+  //       handleError
+  //     );
 
-//     if (!response.ok) {
-//       throw new Error("Network response was not OK");
-//     }
-//   };
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not OK");
+  //     }
+  //   };
 
   const gameOverScreen = () => (
     <div className=" w-screen h-screen flex justify-center items-center">
@@ -235,7 +236,7 @@ console.log(props.scores)
 }
 Game.defaultProps = {
   questions: [],
-  scores: []
+  scores: [],
 };
 
 export default Game;

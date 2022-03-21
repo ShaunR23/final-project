@@ -6,10 +6,12 @@ urlpatterns = [
     path('admin-view/', views.QuestionApproveListAPIView.as_view()),
     path('user/trivia/<int:pk>/', views.UserQuestionDetailAPIView.as_view(),),
     path('user/trivia/', views.UserQuestionListAPIView.as_view()),
-    path('trivia/', views.QuestionListAPIView.as_view()),
+    path('trivia/', views.get_question_list),
     path('daily-trivia/', views.QuestionGameListAPIView.as_view()),
 
     path('user/score/', views.UserScoreListAPIView.as_view()),
     path('score/', views.ScoreListAPIView.as_view()),
     path('user/score/<int:pk>', views.UserScoreDetailListAPIView.as_view()),
+    path('score-hard/', views.ScoreHardListAPIView.as_view()),
+    path('user/score-hard/<int:pk>', views.UserScoreHardListAPIView.as_view()),
 ]

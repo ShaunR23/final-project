@@ -32,7 +32,7 @@ code {
 
 .container {
   /* width: 800px; */
-  max-width: 90%;
+  
   
   /* background-color:#C0C0C0 ; */
   background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
@@ -124,6 +124,7 @@ blockquote.twitter-tweet a:focus {
 
 .leaderboard {
   background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
+  
 }
 /* .hide {
   display: none;
