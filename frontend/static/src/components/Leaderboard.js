@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { handleError } from "../utils";
 
-function Score(props, { user, score,}) {
+function Score(props) {
   const [scores, setScores] = useState(props.scores);
- 
+  const[scoresHard, setScoresHard] = useState(props.scoresHard)
   
   console.log(scores[1].score);
-  
+  console.log(scoresHard)
   
 
-  const sortedScoresHard = scores.sort((a, b) => {
+  const sortedScoresHard = scoresHard.sort((a, b) => {
     return b.score_hard - a.score_hard;
   });
 
@@ -26,6 +26,7 @@ function Score(props, { user, score,}) {
       </h2>
       <div className=" flex justify-center mt-3">
         <table className="items-center shadow-lg border-collapse container">
+        <tbody>
           <tr>
             <th className=" border text-left px-8 py-4">Rank</th>
             <th className=" border text-left px-8 py-4">User</th>
@@ -33,37 +34,39 @@ function Score(props, { user, score,}) {
           </tr>
           <tr>
             <td className="border px-8 py-4">1</td>
-            <td className="border px-8 py-4">{sortedScores[0].user}</td>
+            <td className="border px-8 py-4">{sortedScores[0].username}</td>
             <td className="border px-8 py-4">{sortedScores[0].score}</td>
           </tr>
           <tr>
             <td className="border px-8 py-4">2</td>
-            <td className="border px-8 py-4">{sortedScores[1].user}</td>
+            <td className="border px-8 py-4">{sortedScores[1].username}</td>
             <td className="border px-8 py-4">{sortedScores[1].score}</td>
           </tr>
           <tr>
             <td className="border px-8 py-4">3</td>
-            <td className="border px-8 py-4">{sortedScores[1].user}</td>
+            <td className="border px-8 py-4">{sortedScores[1].username}</td>
             <td className="border px-8 py-4">{sortedScores[1].score}</td>
           </tr>
           <tr>
             <td className="border px-8 py-4">4</td>
-            <td className="border px-8 py-4">{sortedScores[1].user}</td>
+            <td className="border px-8 py-4">{sortedScores[1].username}</td>
             <td className="border px-8 py-4">{sortedScores[1].score}</td>
           </tr>
           <tr>
             <td className="border px-8 py-4">5</td>
-            <td className="border px-8 py-4">{sortedScores[1].user}</td>
+            <td className="border px-8 py-4">{sortedScores[1].username}</td>
             <td className="border px-8 py-4">{sortedScores[1].score}</td>
           </tr>
+          </tbody>
         </table>
       </div>
 
       <h2 className="flex justify-center text-2xl font-semibold font-serif tex-decoration-line: underline mt-3">
-        Survivor
+        Hard
       </h2>
       <div className="flex justify-center mt-3">
         <table className="items-center shadow-lg border-collapse container">
+        <tbody>
           <tr>
             <th className=" border text-left px-8 py-4">Rank</th>
             <th className=" border text-left px-8 py-4">User</th>
@@ -71,39 +74,40 @@ function Score(props, { user, score,}) {
           </tr>
           <tr>
             <td className="border px-8 py-4">1</td>
-            <td className="border px-8 py-4">{sortedScoresHard[0].user}</td>
+            <td className="border px-8 py-4">{sortedScoresHard[0].username}</td>
             <td className="border px-8 py-4">
               {sortedScoresHard[0].score_hard}
             </td>
           </tr>
           <tr>
             <td className="border px-8 py-4">2</td>
-            <td className="border px-8 py-4">{sortedScoresHard[1].user}</td>
+            <td className="border px-8 py-4">{sortedScoresHard[1].username}</td>
             <td className="border px-8 py-4">
               {sortedScoresHard[1].score_hard}
             </td>
           </tr>
           <tr>
             <td className="border px-8 py-4">3</td>
-            <td className="border px-8 py-4">{sortedScoresHard[1].user}</td>
+            <td className="border px-8 py-4">{sortedScoresHard[2].username}</td>
             <td className="border px-8 py-4">
-              {sortedScoresHard[1].score_hard}
+              {sortedScoresHard[2].score_hard}
             </td>
           </tr>
           <tr>
             <td className="border px-8 py-4">4</td>
-            <td className="border px-8 py-4">{sortedScoresHard[1].user}</td>
+            <td className="border px-8 py-4">{sortedScoresHard[0].username}</td>
             <td className="border px-8 py-4">
-              {sortedScoresHard[1].score_hard}
+              {sortedScoresHard[3].score_hard}
             </td>
           </tr>
           <tr>
             <td className="border px-8 py-4">5</td>
-            <td className="border px-8 py-4">{sortedScoresHard[1].user}</td>
+            <td className="border px-8 py-4">{sortedScoresHard[0].username}</td>
             <td className="border px-8 py-4">
-              {sortedScoresHard[1].score_hard}
+              {sortedScoresHard[3].score_hard}
             </td>
           </tr>
+          </tbody>
         </table>
       </div>
     </>
@@ -112,8 +116,8 @@ function Score(props, { user, score,}) {
 
 function Leaderboard(props) {
   const [scores, setScores] = useState(props.scores);
-  const [questions, setQuestions] = useState(props.questions);
-  const [scoresHard, setScoresHard] = useState(props.scores);
+  const [scoresHard, setScoresHard] = useState(props.scoresHard);
+  const [text, setText] = useState('waiting')
   useEffect(() => {
     const getScores = async () => {
       const response = await fetch("/api/v1/score/").catch(handleError);
@@ -129,7 +133,7 @@ function Leaderboard(props) {
 
   useEffect(() => {
     const getScoresHard = async () => {
-      const response = await fetch("/api/v1/score/").catch(handleError);
+      const response = await fetch("/api/v1/score-hard/").catch(handleError);
       if (!response.ok) {
         throw new Error("Network response was not OK!");
       } else {
@@ -140,17 +144,19 @@ function Leaderboard(props) {
     getScoresHard();
   }, []);
 
-  
+  console.log({ scores });
 
   const scoreList = scores.map((score) => (
-    <Score key={score.user} {...score} scores={scores} />
+    <Score key={score.user} {...score} scores={scores} scoresHard={scoresHard}  />
   ));
 
-  console.log({ scores });
+  console.log(scoresHard)
+ 
   return <div>{scoreList[0]}</div>;
 }
 Leaderboard.defaultProps = {
   scores: [],
+  scoresHard: [],
   
 };
 

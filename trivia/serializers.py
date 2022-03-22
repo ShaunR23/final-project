@@ -1,7 +1,7 @@
 import random
 from django.forms import ValidationError
 from rest_framework import serializers
-from .models import Question, Score
+from .models import Question, Score, Score_Hard
 from datetime import date, datetime
 
 
@@ -42,9 +42,19 @@ class QuestionAdminSerializer(serializers.ModelSerializer):
 
 
 class ScoreSerializer(serializers.ModelSerializer):
-
+    username = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Score
+        fields = ('__all__')
+
+    def get_highest_score(self, obj):
+        highScores = obj.score.sort(reverse=True)
+        return highScores
+
+class ScoreHardSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source='user.username')
+    class Meta:
+        model = Score_Hard
         fields = ('__all__')
 
     def get_highest_score(self, obj):

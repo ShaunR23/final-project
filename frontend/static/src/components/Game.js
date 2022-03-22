@@ -17,7 +17,6 @@ function CurrentQuestion({
   question,
   correctAnswer,
 }) {
-  //   const revealAnswer = `Wrong, the correct answer is ${correctAnswer}`;
   const answerButtons = shuffled_answers.map((answer) => {
     const key = Object.keys(answer)[0];
     return (
@@ -26,6 +25,7 @@ function CurrentQuestion({
       </button>
     );
   });
+  console.log(correctAnswer);
 
   return (
     <>
@@ -42,7 +42,6 @@ function CurrentQuestion({
               {/* <div><{ isCorrect ? correct() : revealAnswer()}</div> */}
             </div>
             <span className="text-white text-xl flex justify-center">
-              {" "}
               Score: {score}
             </span>
           </div>
@@ -53,7 +52,7 @@ function CurrentQuestion({
   );
 }
 
-function Game(props) {
+function Game(props, revealAnswer) {
   const [questions, setQuestions] = useState(props.questions);
   const [counter, setCounter] = useState(15);
   const [gameOver, setGameOver] = useState(false);
@@ -65,9 +64,11 @@ function Game(props) {
   let [questionCount, setQuestionCount] = useState(null);
   const [state, setState] = useState({ ...props });
   console.log(scores);
+  console.log(questions);
+  console.log(state);
 
   const correct = "Correct!!";
-  const revealAnswer = `Wrong, the correct answer is ${questions.correctAnswer}`;
+  //   const revealAnswer = `Wrong, the correct answer is ${state.correctAnswer}`;
   const handleAnswer = (value) => {
     if (questionCount > 10) {
       setGameOver(true);
@@ -88,13 +89,13 @@ function Game(props) {
       setCounter(15);
       setTotalAnswer(totalAnswer + 1);
       setQuestionCount(questionCount + 1);
-      alert(revealAnswer);
+      alert(`Wrong, the correct answer is ${questions[0].correctAnswer}`);
     }
   };
 
   useEffect(() => {
     const getQuestions = async () => {
-      const response = await fetch("/api/v1/daily-trivia/").catch(handleError);
+      const response = await fetch("/api/v1/trivia/").catch(handleError);
       if (!response.ok) {
         throw new Error("Network response was not OK!");
       } else {
@@ -120,7 +121,7 @@ function Game(props) {
 
   // Post score at end of game
   useEffect(() => {
-    if (questionCount > 1) {
+    if (questionCount > 9) {
       setGameOver(true);
 
       const options = {
@@ -134,9 +135,9 @@ function Game(props) {
 
       const response = fetch(`/api/v1/user/score/`, options).catch(handleError);
 
-    //   if (!response.ok) {
-    //     throw new Error("Network response was not OK");
-    //   }
+      //   if (!response.ok) {
+      //     throw new Error("Network response was not OK");
+      //   }
     } else if (questionCount < 10) {
       let timer =
         counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
@@ -158,33 +159,14 @@ function Game(props) {
     }
   }, [counter]);
 
-  let trivia = questions
-    .slice(0, 10)
-    .map((question) => (
-      <CurrentQuestion
-        {...question}
-        handleAnswer={handleAnswer}
-        counter={counter}
-        score={score}
-      />
-    ));
-  //   const handleSubmitScore = async () => {
-  //     const options = {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //         "X-CSRFToken": Cookies.get("csrftoken"),
-  //       },
-  //     };
-
-  //     const response = await fetch(`/api/v1/user/score/`, options).catch(
-  //       handleError
-  //     );
-
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not OK");
-  //     }
-  //   };
+  let trivia = questions.map((question) => (
+    <CurrentQuestion
+      {...question}
+      handleAnswer={handleAnswer}
+      counter={counter}
+      score={score}
+    />
+  ));
 
   const gameOverScreen = () => (
     <div className=" w-screen h-screen flex justify-center items-center">
@@ -222,7 +204,6 @@ function Game(props) {
   );
   console.log(counter);
   console.log(score);
-  console.log(trivia);
   console.log(rightAnswer);
   console.log(totalAnswer);
   console.log(gameOver);

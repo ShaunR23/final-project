@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from .models import Question, Score, Score_Hard
-from .serializers import QuestionSerializer, UserQuestionSerializer, QuestionAdminSerializer, ScoreSerializer
+from .serializers import QuestionSerializer, UserQuestionSerializer, QuestionAdminSerializer, ScoreSerializer, ScoreHardSerializer
 from .permissions import IsAuthorOrReadOnly, IsUserOrReadOnly
 
 
@@ -144,7 +144,7 @@ class UserScoreDetailListAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class ScoreHardListAPIView(generics.ListCreateAPIView):
 
-    serializer_class = ScoreSerializer
+    serializer_class = ScoreHardSerializer
 
     def get_queryset(self):
         return Score_Hard.objects.filter(user=self.request.user.id)
@@ -154,7 +154,7 @@ class ScoreHardListAPIView(generics.ListCreateAPIView):
 
 class UserScoreHardListAPIView(generics.ListCreateAPIView):
 
-    serializer_class = ScoreSerializer
+    serializer_class = ScoreHardSerializer
 
     def get_queryset(self):
         return Score_Hard.objects.filter(user=self.request.user.id)

@@ -29,11 +29,4 @@ class QuestionTestModels(TestCase):
         self.assertEqual(questions.incorrectAnswer3, 'incorrect answer'),
         self.assertEqual(questions.correctAnswer, 'correct answer')
 
-    # def test_create_question(self):
-    #     response = client.post(
-    #         reverse('trivia:'),
-    #          data=json.dumps(self.valid_payload),
-    #         content_type='application/json',
-    #     )
-
-    #     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+    
