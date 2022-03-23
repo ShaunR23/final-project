@@ -28,7 +28,7 @@ function Question({
       },
     };
 
-    const response = await fetch(`/api/v1/user/trivia/${id}`, options).catch(
+    const response = await fetch(`/api/v1/user/trivia-list/${id}`, options).catch(
       handleError
     );
 
@@ -85,7 +85,7 @@ function Questions(props) {
 
   useEffect(() => {
     const getQuestions = async () => {
-      const response = await fetch("/api/v1/user/trivia/").catch(handleError);
+      const response = await fetch("/api/v1/user/trivia-list/").catch(handleError);
       if (!response.ok) {
         throw new Error("Network response was not OK!");
       } else {

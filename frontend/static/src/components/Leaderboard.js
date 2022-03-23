@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { handleError } from "../utils";
+import Cookies from "js-cookie";
 
 function Board({ title, scores }) {
   const tableRows = scores.map((score, index) => (
@@ -36,7 +37,11 @@ function Leaderboard(props) {
   const [scoresHard, setScoresHard] = useState(props.scoresHard);
 
   const getScores = async () => {
-    const response = await fetch("/api/v1/leaderboard/").catch(handleError);
+    const response = await fetch("/api/v1/leaderboard/", {
+      headers: {
+        Authorization: Cookies.get("Authorization"),
+      },
+    }).catch(handleError);
     if (!response.ok) {
       throw new Error("Network response was not OK!");
     }

@@ -38,11 +38,12 @@ function QuestionForm(props) {
       method: "POST",
       headers: {
         "X-CSRFToken": Cookies.get("csrftoken"),
+        Authorization: Cookies.get("Authorization"),
       },
       body: formData,
     };
 
-    await fetch("/api/v1/user/trivia/", options);
+    await fetch("/api/v1/user/trivia-list/", options);
     setState({ ...state, ...INITIAL_STATE });
   };
 
@@ -59,11 +60,12 @@ function QuestionForm(props) {
       method: "PUT",
       headers: {
         "X-CSRFToken": Cookies.get("csrftoken"),
+        Authorization: Cookies.get("Authorization"),
       },
       body: formData,
     };
 
-    await fetch(`/api/v1/user/trivia/${state.id}/`, options.catch(handleError));
+    await fetch(`/api/v1/user/trivia-list/${state.id}/`, options.catch(handleError));
   };
 
   return (

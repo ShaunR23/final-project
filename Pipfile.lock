@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "349b765750738f0f4d5f3b3a68188413348adc3578b8936faa92b0e537f5a4fe"
+            "sha256": "16fa0a26be3cca9bd875a10594d0297b321a8d4550c661a8eedd04ca4ce9cc2a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -126,13 +126,6 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==0.7.1"
-        },
-        "dj-rest-auth": {
-            "hashes": [
-                "sha256:f292f3dffb8fc896da10adf47e94a254fb8bf42e672a066e63566363d764ad42"
-            ],
-            "index": "pypi",
-            "version": "==2.2.3"
         },
         "django": {
             "hashes": [
@@ -299,7 +292,7 @@
                 "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61",
                 "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'",
+            "index": "pypi",
             "version": "==2.27.1"
         },
         "requests-oauthlib": {
@@ -307,7 +300,7 @@
                 "sha256:2577c501a2fb8d05a304c09d090d6e47c306fef15809d102b327cf8364bddab5",
                 "sha256:75beac4a47881eeb94d5ea5d6ad31ef88856affe2332b9aafb52c6452ccf0d7a"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "index": "pypi",
             "version": "==1.3.1"
         },
         "setuptools": {

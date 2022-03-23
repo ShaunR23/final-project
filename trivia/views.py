@@ -1,7 +1,6 @@
 from django.utils import timezone
-from rest_framework.decorators import api_view
 import datetime
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import generics
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -9,15 +8,17 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from .models import Question, Score, Score_Hard
 from .serializers import QuestionSerializer, UserQuestionSerializer, QuestionAdminSerializer, ScoreSerializer, ScoreHardSerializer
 from .permissions import IsAuthorOrReadOnly, IsUserOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 @api_view()
+@permission_classes([IsAuthenticatedOrReadOnly])
 def get_question_list(request):
 
     today = datetime.date.today()
-
-    if Score.objects.filter(user=request.user, date=today).exists():
-        return Response({'score': Score.objects.get(user=request.user, date=today).score})
+    if not request.user.is_anonymous:
+        if Score.objects.filter(user=request.user, date=today).exists():
+            return Response({'score': Score.objects.get(user=request.user, date=today).score})
 
     questions = Question.objects.filter(date=datetime.date.today())
 
@@ -109,7 +110,7 @@ class QuestionGameListAPIView(generics.ListAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-        return Question.objects.all()[0:10]
+        return Question.objects.all()
 
 
 class ScoreListAPIView(generics.ListAPIView):

@@ -27,7 +27,7 @@ function Login() {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const options = {
       method: "POST",
       headers: {
@@ -54,7 +54,7 @@ function Login() {
   };
 
   const twitterAuth = async () => {
-    const response = await fetch("/accounts/twitter/request_token/", {
+    const response = await fetch("/api/v1/twitter/request_token/", {
       method: "GET",
     });
 
@@ -70,7 +70,7 @@ function Login() {
     const oauth_verifier = searchParams.get("oauth_verifier");
 
     const response = await fetch(
-      `/accounts/twitter/login/callback/?oauth_token=${oauth_token}&oauth_verifier=${oauth_verifier}`,
+      `/api/v1/twitter/login/callback/?oauth_token=${oauth_token}&oauth_verifier=${oauth_verifier}`,
       {
         method: "GET",
       }
@@ -79,8 +79,16 @@ function Login() {
     console.log("response", response);
     if (!response.ok) {
       throw new Error("Something went wrong!");
+      return;
     }
-    navigate("/welcome", { replace: true });
+
+    const data = await response.json();
+    console.log("twitter auth data", data);
+    Cookies.set("Authorization", `Token ${data.key}`);
+    setAuth(true);
+    setAdmin(data.is_superuser);
+    setState(INITIAL_STATE);
+    navigate("/game", { replace: true });
   };
 
   const oauth_token = searchParams.get("oauth_token");

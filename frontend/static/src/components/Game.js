@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 import Questions from "./Questions";
 import { handleError } from "../utils";
 import Leaderboard from "./Leaderboard";
@@ -54,7 +55,7 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
             <span className="text-light-red flex justify-center text-3xl">
               {counter}
             </span>
-            <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7">
+            <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7 ">
               {answerButtons}
             </div>
             <span className="text-white text-xl flex justify-center">
@@ -67,11 +68,11 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
   );
 }
 
-function Game(props,{isAuth}) {
+function Game(props) {
   const [mode, setMode] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [alreadyPlayed, setAlreadyPlayed] = useState(false);
   
-
   const [questions, setQuestions] = useState(props.questions);
   const [fetchingData, setFetchingData] = useState(false);
 
@@ -79,19 +80,34 @@ function Game(props,{isAuth}) {
   const [totalQuestions, setTotalQuestions] = useState(0);
 
   const [score, setScore] = useState(0);
+ 
+  const { isAuth } = useOutletContext();
+  
 
   const handleSelection = (selection) => {
     setMode(selection);
     setFetchingData(true);
   };
 
+
+
   useEffect(() => {
     const getQuestions = async () => {
-      const response = await fetch("/api/v1/trivia/").catch(handleError);
+      const response = await fetch("/api/v1/trivia/", {
+        headers: {
+          Authorization: Cookies.get("Authorization"),
+        },
+      }).catch(handleError);
       if (!response.ok) {
         throw new Error("Network response was not OK!");
       }
+
       const data = await response.json();
+      if (data.score) {
+        
+        setAlreadyPlayed(true);
+        return;
+      }
       setQuestions(data);
       setFetchingData(false);
     };
@@ -99,6 +115,8 @@ function Game(props,{isAuth}) {
       getQuestions();
     }
   }, [mode]);
+
+ 
 
   // passes in true if answer is correct; false, otherwise
   const handleAnswer = ({ guess, counter }) => {
@@ -112,22 +130,18 @@ function Game(props,{isAuth}) {
       const updatedQuestions = [...questions];
       updatedQuestions.shift();
 
-      if (updatedQuestions.length === 0 ) {
+      if (updatedQuestions.length === 0 || (mode == "hard" && guess == false)) {
         setGameOver(true);
-       
-        postScore();
-      }
-
-      else if(mode == 'hard' && guess == false){
-          setGameOver(true)
+        if (isAuth) {
+          postScore();
+        }
       }
 
       setQuestions(updatedQuestions);
     }, 2000);
   };
 
-  //   const correct = "Correct!!";
-  //   const revealAnswer = `Wrong, the correct answer is ${state.correctAnswer}`;
+  
 
   const postScore = () => {
     const hard_mode = mode === "hard" ? true : false;
@@ -137,6 +151,7 @@ function Game(props,{isAuth}) {
       headers: {
         "Content-type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
+        Authorization: Cookies.get("Authorization"),
       },
       body: JSON.stringify({ score, hard_mode }),
     };
@@ -146,6 +161,26 @@ function Game(props,{isAuth}) {
       throw new Error("Network response was not OK");
     }
   };
+  
+
+//   const getScores = async () => {
+//     const response = await fetch("/api/v1/leaderboard/", {
+//       headers: {
+//         Authorization: Cookies.get("Authorization"),
+//       },
+//     }).catch(handleError);
+//     if (!response.ok) {
+//       throw new Error("Network response was not OK!");
+//     }
+//     const data = await response.json();
+//     setScores(data.top_scores);
+//     setScoresHard(data.hard_mode_top_scores);
+//   };
+
+//   useEffect(() => {
+//     getScores();
+//   }, []);
+
 
   //   // Post score at end of game
   //   useEffect(() => {
@@ -239,6 +274,19 @@ function Game(props,{isAuth}) {
           </div>
         </div>
       </div>
+    );
+  }
+
+  if (alreadyPlayed) {
+    return (
+      <>
+        <div className=" flex  justify-center mt-32 ">
+          <div className="container rounded-2xl mt-10 flex justify-center pt-10  pb-10">
+            You have already played your round for the day.
+            
+          </div>
+        </div>
+      </>
     );
   }
 

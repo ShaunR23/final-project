@@ -118,6 +118,19 @@ function Header({isAuth, isAdmin, handleLogout }) {
         </button>
         <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+          <li>
+            {isAdmin && (
+
+              <NavLink
+                className="navLinks"
+                to="/admin-view"
+                href="#"
+                className="block py-2 pr-4 pl-3 text-white hover:text-green hover:bg-light-blue md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >
+                Admin
+              </NavLink>
+              )}
+            </li>
             <li>
               <NavLink
                 className="navLinks"
@@ -139,28 +152,16 @@ function Header({isAuth, isAdmin, handleLogout }) {
               </NavLink>
             </li>
 
-            <NavLink
+            {/* <NavLink
               className="navLinks"
               to="/profile"
               href="#"
               className="block py-2 pr-4 pl-3 text-white hover:text-green hover:bg-light-blue md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
             >
               User Record
-            </NavLink>
+            </NavLink> */}
 
-            <li>
-            {isAdmin && (
-
-              <NavLink
-                className="navLinks"
-                to="/admin-view"
-                href="#"
-                className="block py-2 pr-4 pl-3 text-white hover:text-green hover:bg-light-blue md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-              >
-                Admin
-              </NavLink>
-              )}
-            </li>
+            
             <li>
               <NavLink
                 className="navLinks"

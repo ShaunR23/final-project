@@ -21,11 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["SECRET_KEY"]
-API_KEY = os.environ["API_KEY"]
-API_SECRET_KEY = os.environ["API_SECRET_KEY"]
+TWITTER_API_KEY = os.environ["TWITTER_API_KEY"]
+TWITTER_API_SECRET_KEY = os.environ["TWITTER_API_SECRET_KEY"]
 BEARER_TOKEN = os.environ["BEARER_TOKEN"]
 ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
+
+TWITTER_URL_CALLBACK = 'http://127.0.0.1:8000/login/'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -43,7 +45,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
@@ -64,15 +66,15 @@ INSTALLED_APPS = [
     "corsheaders",
     'allauth',
     'allauth.account',
-    # 'rest_auth.registration',
+    'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.twitter',
     'tweepy',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
-    'dj_rest_auth.registration',
     
+
 
     'frontend.apps.FrontendConfig',
     'accounts.apps.AccountsConfig',
@@ -89,6 +91,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:3000',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -169,7 +175,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 
-#static file directories
+# static file directories
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/static/build/static'),)
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 
@@ -193,5 +199,3 @@ REST_AUTH_SERIALIZERS = {
 # https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-TWITTER_URL_CALLBACK = 'http://127.0.0.1:8000/'
