@@ -192,19 +192,19 @@ function Game(props,{isAuth}) {
   if (!mode) {
     return (
       <div className=" flex flex-column justify-center mt-10 ">
-        <div className="container home1 dark:bg-gray-800 shadow-lg dark:shadow-none rounded-2xl ml mt-10 hover:shadow-xl dark:hover:shadow-dark ">
+        <div className="container home1 dark:bg-gray-800 shadow-lg dark:shadow-none rounded-2xl ml mt-32 hover:shadow-xl dark:hover:shadow-dark ">
           <div className="flex justify-center">
             <button
               type="button"
               onClick={() => handleSelection("normal")}
-              className="p-4 text-white bg-reg-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4 font-serif "
+              className="p-4 text-white bg-reg-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-4 font-serif h-28"
             >
               Normal Mode
             </button>
             <button
               type="button"
               onClick={() => handleSelection("hard")}
-              className="p-4 text-white bg-reg-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4 font-serif "
+              className="p-4 text-white bg-reg-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-4 font-serif "
             >
               Hard Mode
             </button>
