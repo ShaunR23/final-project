@@ -28,8 +28,9 @@ ReactDOM.render(
         <Route path="question-list" element={<Questions />} />
         <Route path="admin-view" element={<AdminView />} />
         <Route path="game" element={<Game />} />
-        <Route path="game-hard" element={<GameHard />} />
         <Route path="home" element={<Home />} />
+        
+        
         <Route path="leaderboard" element={<Leaderboard />} />
         <Route path="profile" element={<ProfileView />} />
         </Route>

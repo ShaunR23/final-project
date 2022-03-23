@@ -1,4 +1,5 @@
 from django.utils import timezone
+from rest_framework.decorators import api_view
 import datetime
 from rest_framework.decorators import api_view
 from rest_framework import generics
@@ -113,9 +114,10 @@ class QuestionGameListAPIView(generics.ListAPIView):
 
 class ScoreListAPIView(generics.ListAPIView):
     serializer_class = ScoreSerializer
+    queryset = Score.objects.all()
 
-    def get_queryset(self):
-        return Score.objects.all()
+    # def get_queryset(self):
+    #     return Score.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(self.request.user)
@@ -142,6 +144,7 @@ class UserScoreDetailListAPIView(generics.RetrieveUpdateDestroyAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
 class ScoreHardListAPIView(generics.ListCreateAPIView):
 
     serializer_class = ScoreHardSerializer
@@ -151,6 +154,7 @@ class ScoreHardListAPIView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class UserScoreHardListAPIView(generics.ListCreateAPIView):
 
@@ -162,3 +166,15 @@ class UserScoreHardListAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
+@api_view(['GET'])
+def get_leaderboard(request):
+    hard_mode_top_scores = Score.objects.filter(
+        hard_mode=True).order_by('-score')[:10]
+
+    hard_mode = ScoreSerializer(hard_mode_top_scores, many=True)
+
+    top_scores = Score.objects.filter(hard_mode=False).order_by('-score')[:10]
+    scores = ScoreSerializer(top_scores, many=True)
+
+    return Response({"hard_mode_top_scores": hard_mode.data, "top_scores": scores.data})

@@ -33,6 +33,7 @@ class Score(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateField(auto_now_add=True, blank=True, null=True)
+    hard_mode = models.BooleanField(default=False)
 
 
 class Score_Hard(models.Model):

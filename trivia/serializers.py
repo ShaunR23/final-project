@@ -43,6 +43,7 @@ class QuestionAdminSerializer(serializers.ModelSerializer):
 
 class ScoreSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Score
         fields = ('__all__')
@@ -51,8 +52,10 @@ class ScoreSerializer(serializers.ModelSerializer):
         highScores = obj.score.sort(reverse=True)
         return highScores
 
+
 class ScoreHardSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Score_Hard
         fields = ('__all__')

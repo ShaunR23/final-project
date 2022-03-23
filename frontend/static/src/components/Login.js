@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   username: "",
   password: "",
 };
-function Login({match}) {
+function Login() {
   const { navigate, setAuth, setAdmin } = useOutletContext();
   let [searchParams] = useSearchParams();
 
@@ -27,6 +27,7 @@ function Login({match}) {
   };
 
   const handleSubmit = async (event) => {
+    event.preventDefault()
     const options = {
       method: "POST",
       headers: {
@@ -49,7 +50,7 @@ function Login({match}) {
     setAuth(true);
     setAdmin(data.is_superuser);
     setState(INITIAL_STATE);
-    navigate("/", { replace: true });
+    navigate("/game", { replace: true });
   };
 
   const twitterAuth = async () => {
