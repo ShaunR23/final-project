@@ -38,7 +38,7 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
     return (
       <button
         key={index}
-        className={`btn correct`}
+        className={`btn`}
         onClick={(event) => handleClick({ event, guess: answer[key] })}
       >
         {[key]}
@@ -57,7 +57,7 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
             <span className="text-light-red flex justify-center text-3xl">
               {counter}
             </span>
-            <div id="answer-buttons" className="text-white grid gap-4 my-7 ">
+            <div id="answer-buttons" className="text-white  grid gap-4 my-7 ">
               {answerButtons}
             </div>
             <span className="text-white text-xl flex justify-center">

@@ -23,11 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["SECRET_KEY"]
 TWITTER_API_KEY = os.environ["TWITTER_API_KEY"]
 TWITTER_API_SECRET_KEY = os.environ["TWITTER_API_SECRET_KEY"]
-BEARER_TOKEN = os.environ["BEARER_TOKEN"]
-ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
-ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
+# BEARER_TOKEN = os.environ["BEARER_TOKEN"]
+# ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
+# ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
 
 TWITTER_URL_CALLBACK = 'http://127.0.0.1:8000/login/'
+DOMAIN = os.environ['DOMAIN']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -66,14 +67,14 @@ INSTALLED_APPS = [
     "corsheaders",
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
+    'dj_rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.twitter',
     'tweepy',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
-    
+    'dj_rest_auth',
+
 
 
     'frontend.apps.FrontendConfig',
@@ -95,6 +96,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'config.urls'

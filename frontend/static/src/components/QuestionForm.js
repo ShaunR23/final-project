@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 import { handleError } from "../utils";
 import AdminView from "./AdminView";
+import Questions from "./Questions";
 
 const INITIAL_STATE = {
   question: "",
@@ -22,57 +23,89 @@ function QuestionForm(props) {
     setState((prevState) => ({
       ...prevState,
       [name]: value,
+      
     }));
   };
+  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("question", state.question);
-    formData.append("incorrectAnswer1", state.incorrectAnswer1);
-    formData.append("incorrectAnswer2", state.incorrectAnswer2);
-    formData.append("incorrectAnswer3", state.incorrectAnswer3);
-    formData.append("correctAnswer", state.correctAnswer);
+  const handleSave = async (e) => {
+    const data = { ...state, phase: e.target.value };
+    let url = "/api/v1/user/trivia-list/";
+    let method = "POST";
+
+    if (data.id) {
+      url = url + `${data.id}/`;
+      method = "PUT";
+      delete data.id;
+    }
 
     const options = {
-      method: "POST",
+      method,
       headers: {
         "X-CSRFToken": Cookies.get("csrftoken"),
+        "Content-Type": "application/json",
         Authorization: Cookies.get("Authorization"),
       },
-      body: formData,
+      body: JSON.stringify(data),
     };
 
-    await fetch("/api/v1/user/trivia-list/", options);
+    const response = await fetch(url, options);
+    const json = await response.json();
     setState({ ...state, ...INITIAL_STATE });
+    console.log(response);
+
+    if (json.phase === "SUBMITTED") {
+      const updatedQuestions = [...props.questions];
+      const index = updatedQuestions.findIndex(
+        (question) => question.id === json.id
+      );
+      updatedQuestions.splice(index, 1);
+      props.setQuestions(updatedQuestions);
+    } else if (method === "POST") {
+      props.setQuestions([...props.questions, json]);
+    } else if ((method = "PUT")) {
+      const updatedQuestions = [...props.questions];
+      const index = updatedQuestions.findIndex(
+        (question) => question.id === json.id
+      );
+      updatedQuestions[index] = json;
+      props.setQuestions(updatedQuestions);
+    }
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("question", state.question);
-    formData.append("incorrectAnswer1", state.incorrectAnswer1);
-    formData.append("incorrectAnswer2", state.incorrectAnswer2);
-    formData.append("incorrectAnswer3", state.incorrectAnswer3);
-    formData.append("correctAnswer", state.correctAnswer);
+  // const handleUpdate = async (e) => {
+  //   e.preventDefault();
+  //   console.log("event", e);
+  //   const data = { ...state };
+  //   delete data.id;
 
-    const options = {
-      method: "PUT",
-      headers: {
-        "X-CSRFToken": Cookies.get("csrftoken"),
-        Authorization: Cookies.get("Authorization"),
-      },
-      body: formData,
-    };
+  //   // const formData = new FormData();
+  //   // formData.append("question", state.question);
+  //   // formData.append("incorrectAnswer1", state.incorrectAnswer1);
+  //   // formData.append("incorrectAnswer2", state.incorrectAnswer2);
+  //   // formData.append("incorrectAnswer3", state.incorrectAnswer3);
+  //   // formData.append("correctAnswer", state.correctAnswer);
 
-    await fetch(`/api/v1/user/trivia-list/${state.id}/`, options.catch(handleError));
-  };
+  //   // const options = {
+  //   //   method: "PUT",
+  //   //   headers: {
+  //   //     "X-CSRFToken": Cookies.get("csrftoken"),
+  //   //     Authorization: Cookies.get("Authorization"),
+  //   //   },
+  //   //   body: formData,
+  //   // };
+  //   // state.phase = "SUBMIT";
+  //   // await fetch(
+  //   //   `/api/v1/user/trivia-list/${state.id}/`,
+  //   //   options.catch(handleError)
+  //   // );
+  // };
 
   return (
     <div className="h-screen ">
       <div className="container mx-auto h-full flex justify-center items-center">
         <div className="">
-          <form onSubmit={state.id ? handleUpdate : handleSubmit}>
+          <form>
             <div className="mb-4">
               <label
                 htmlFor="question"
@@ -156,16 +189,18 @@ function QuestionForm(props) {
             </div>
 
             <button
-              type="submit"
-              onClick={() => setPhase("DRAFT")}
+              type="button"
+              onClick={handleSave}
+              value="DRAFT"
               className="text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center dark:bg-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Save
             </button>
 
             <button
-              type="submit"
-              onClick={() => setPhase("SUBMITTED")}
+              type="button"
+              value="SUBMITTED"
+              onClick={handleSave}
               className="text-white bg-dark-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Submit

@@ -28,6 +28,7 @@ module.exports = {
       'dark-green': 'rgb(22 101 52)',
       'light-blue': '#22d3ee',
       'light-red' : '#e11d48',
+      'reg-red': '#dc2626',
       
     },
     fontFamily: {

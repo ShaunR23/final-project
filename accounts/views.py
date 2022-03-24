@@ -3,15 +3,15 @@ import json
 from .models import Profile
 from .serializers import ProfileSerializer
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.views import APIView
 from .permissions import isUserOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.conf import settings
 from rest_framework.decorators import api_view, permission_classes
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
-from rest_auth.registration.views import SocialLoginView
-from rest_auth.social_serializers import TwitterLoginSerializer
+from dj_rest_auth.registration.views import SocialLoginView
+from dj_rest_auth.social_serializers import TwitterLoginSerializer
 from requests_oauthlib import OAuth1Session
 from rest_framework.response import Response
 from django.shortcuts import redirect
@@ -53,8 +53,6 @@ class TwitterLogin(SocialLoginView):
 @permission_classes([IsAuthenticatedOrReadOnly])
 def twitter_request_token(request):
     request_token_url = 'https://api.twitter.com/oauth/request_token'
-    # import pdb
-    # pdb.set_trace()
     oauth_session = OAuth1Session(
         settings.TWITTER_API_KEY,
         client_secret=settings.TWITTER_API_SECRET_KEY,

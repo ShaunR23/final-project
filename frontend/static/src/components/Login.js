@@ -158,7 +158,7 @@ function Login() {
               <button
                 id="login-submit"
                 type="submit"
-                className="text-dark-green font-bold py-2 px-4 rounded border border-dark-green"
+                className="text-dark-green font-bold py-2 px-4 mr-3 rounded border border-dark-green"
               >
                 Login
               </button>
@@ -180,9 +180,9 @@ function Login() {
             </div>
           </form>
           <div className="text-center">
-            <p className="text-gray-dark text-sm">
-              Don't have an account?{" "}
-              <a href="#" className="no-underline text-dark-green font-bold">
+            <p className="text-gray-dark">
+              Don't have an account? &nbsp;
+              <a href="#" className="underline text-white font-bold">
                 Create an Account
               </a>
               .

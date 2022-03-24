@@ -46,9 +46,9 @@ code {
 }
 
 
-.btn, .articleBtn {
+.articleBtn {
   
-  background-color: ;
+ 
   border-radius: 5px;
   padding: 5px 10px;
   border-width: medium;
@@ -56,12 +56,20 @@ code {
   outline: none ;
 }
 
+.btn {
+  border-radius: 5px;
+  padding: 5px 10px;
+  border-width: medium;
+  border-color: teal;
+  outline: none 
+}
+
 .articleBtn{
   border: 2px solid green;
 }
 
 .articleBtn2 {
-  --hue: var(--hue-neutral);
+ 
   border: 1px solid red;
   color: black;
   background-color: red ;

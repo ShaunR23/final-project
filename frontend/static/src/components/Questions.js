@@ -11,7 +11,9 @@ function Question({
   question,
   correctAnswer,
   phase,
-  
+  id,
+  setQuestions,
+  questions,
 }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -19,7 +21,6 @@ function Question({
   const [view, setView] = useState(null);
 
   const handleDelete = async (id) => {
-       
     const options = {
       method: "DELETE",
       headers: {
@@ -28,9 +29,10 @@ function Question({
       },
     };
 
-    const response = await fetch(`/api/v1/user/trivia-list/${id}`, options).catch(
-      handleError
-    );
+    const response = await fetch(
+      `/api/v1/user/trivia-list/${id}`,
+      options
+    ).catch(handleError);
 
     if (!response.ok) {
       throw new Error("Network response was not OK");
@@ -74,44 +76,55 @@ function Question({
           {/* <button className="articleBtn2 mt-1" variant="primary" onClick={() => handleDelete(question.id)}>
             Delete
           </button> */}
-          <div className=" flex flex-row  justify-center mt-8 ">
+      <div className=" flex flex-row  justify-center mt-8 ">
         <div className="container rounded-2xl mt-10   pt-10  pb-10">
-          
-        <h6 className='font-serif text-white' >{question}</h6>
-      
-          <p className='font-serif mt-2 text-white'>{incorrectAnswer1}</p>
-          <p className='font-serif mt-2 text-white'>{incorrectAnswer2}</p>
-          <p className='font-serif mt-2 text-white'>{incorrectAnswer3}</p>
-          <p className='font-serif mt-2 text-dark-green'>Correct Answer = {correctAnswer}</p>
+          <h6 className="font-serif text-white">{question}</h6>
+
+          <p className="font-serif mt-2 text-white">{incorrectAnswer1}</p>
+          <p className="font-serif mt-2 text-white">{incorrectAnswer2}</p>
+          <p className="font-serif mt-2 text-white">{incorrectAnswer3}</p>
+          <p className="font-serif mt-2 text-dark-green">
+            Correct Answer = {correctAnswer}
+          </p>
           <Modal show={show} onHide={handleClose}>
             {/* <Modal.Body> */}
-              <QuestionForm
-                question={question}
-                incorrectAnswer1={incorrectAnswer1}
-                incorrectAnswer2={incorrectAnswer2}
-                incorrectAnswer3={incorrectAnswer3}
-                correctAnswer={correctAnswer}
-                phase={phase}
-              />
-              
-            {/* </Modal.Body> */}
-            <button className="btn h-100% text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-0 mt-0 text-center" variant="primary" onClick= {handleClose}>
-            Close
-          </button> 
-          </Modal>
-          
+            <QuestionForm
+              question={question}
+              incorrectAnswer1={incorrectAnswer1}
+              incorrectAnswer2={incorrectAnswer2}
+              incorrectAnswer3={incorrectAnswer3}
+              correctAnswer={correctAnswer}
+              phase={phase}
+              id={id}
+              questions={questions}
+              setQuestions={setQuestions}
+            />
 
-          <button className="btn h-100% text-white bg-reg-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 mt-3 mb-3 text-center" variant="primary" onClick= {handleShow}>
+            {/* </Modal.Body> */}
+            <button
+              className="btn h-100% text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-0 mt-0 text-center"
+              variant="primary"
+              onClick={handleClose}
+            >
+              Close
+            </button>
+          </Modal>
+
+          <button
+            className="btn h-100% text-white bg-reg-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 mt-3 mb-3 text-center"
+            variant="primary"
+            onClick={handleShow}
+          >
             Edit
-          </button> 
+          </button>
           <br></br>
           {/* <button className="btn articleBtn2 text-white  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center " variant="primary" onClick={handleClose}>
             Delete
           </button> */}
         </div>
-          </div>
+      </div>
     </article>
-  )
+  );
 }
 
 function Questions(props) {
@@ -119,7 +132,9 @@ function Questions(props) {
 
   useEffect(() => {
     const getQuestions = async () => {
-      const response = await fetch("/api/v1/user/trivia-list/").catch(handleError);
+      const response = await fetch("/api/v1/user/trivia-list/").catch(
+        handleError
+      );
       if (!response.ok) {
         throw new Error("Network response was not OK!");
       } else {
@@ -131,7 +146,12 @@ function Questions(props) {
   }, []);
 
   const questionList = questions.map((question) => (
-    <Question key={question.id} {...question} />
+    <Question
+      key={question.id}
+      {...question}
+      questions={questions}
+      setQuestions={setQuestions}
+    />
   ));
 
   return (

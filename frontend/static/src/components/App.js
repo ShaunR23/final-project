@@ -4,12 +4,13 @@ import Register from "./Register.js";
 import Header from "./Header.js";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, useSearchParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 function App(handleError) {
   const navigate = useNavigate();
   const [isAuth, setAuth] = useState(null);
   const [isAdmin, setAdmin] = useState(null);
+  let [searchParams] = useSearchParams();
 
   const checkAuth = async () => {
     const response = await fetch("/rest-auth/user/", {
@@ -27,6 +28,10 @@ function App(handleError) {
   };
 
   useEffect(() => {
+    const oauth_token = searchParams.get("oauth_token");
+    if (oauth_token) {
+      return;
+    }
     setTimeout(checkAuth, 500);
   }, []);
 
