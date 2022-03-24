@@ -12,7 +12,7 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
   const [counter, setCounter] = useState(15);
   const timer = useRef(null);
 
-  const handleClick = ({ guess }) => {
+  const handleClick = ({ event,guess }) => {
     handleAnswer({ guess, counter });
     clearInterval(timer.current);
   };
@@ -38,8 +38,8 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
     return (
       <button
         key={index}
-        className="btn"
-        onClick={() => handleClick({ guess: answer[key] })}
+        className={`btn correct`}
+        onClick={(event) => handleClick({ event, guess: answer[key] })}
       >
         {[key]}
       </button>
@@ -50,12 +50,14 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
     <>
       <div className=" w-screen h-screen flex items-center">
         <div className="container">
-          <div id="question-container" className="hide">
-            <div id="question">{question}</div>
+          <div id="question-container " className="hide">
+            <div id="question" className="text-white font-serif">
+              {question}
+            </div>
             <span className="text-light-red flex justify-center text-3xl">
               {counter}
             </span>
-            <div id="answer-buttons" className="grid gap-4 grid-cols-2 my-7 ">
+            <div id="answer-buttons" className="text-white grid gap-4 my-7 ">
               {answerButtons}
             </div>
             <span className="text-white text-xl flex justify-center">
@@ -72,7 +74,7 @@ function Game(props) {
   const [mode, setMode] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [alreadyPlayed, setAlreadyPlayed] = useState(false);
-  
+
   const [questions, setQuestions] = useState(props.questions);
   const [fetchingData, setFetchingData] = useState(false);
 
@@ -80,16 +82,13 @@ function Game(props) {
   const [totalQuestions, setTotalQuestions] = useState(0);
 
   const [score, setScore] = useState(0);
- 
+
   const { isAuth } = useOutletContext();
-  
 
   const handleSelection = (selection) => {
     setMode(selection);
     setFetchingData(true);
   };
-
-
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -104,7 +103,6 @@ function Game(props) {
 
       const data = await response.json();
       if (data.score) {
-        
         setAlreadyPlayed(true);
         return;
       }
@@ -115,8 +113,6 @@ function Game(props) {
       getQuestions();
     }
   }, [mode]);
-
- 
 
   // passes in true if answer is correct; false, otherwise
   const handleAnswer = ({ guess, counter }) => {
@@ -141,8 +137,6 @@ function Game(props) {
     }, 2000);
   };
 
-  
-
   const postScore = () => {
     const hard_mode = mode === "hard" ? true : false;
 
@@ -161,26 +155,24 @@ function Game(props) {
       throw new Error("Network response was not OK");
     }
   };
-  
 
-//   const getScores = async () => {
-//     const response = await fetch("/api/v1/leaderboard/", {
-//       headers: {
-//         Authorization: Cookies.get("Authorization"),
-//       },
-//     }).catch(handleError);
-//     if (!response.ok) {
-//       throw new Error("Network response was not OK!");
-//     }
-//     const data = await response.json();
-//     setScores(data.top_scores);
-//     setScoresHard(data.hard_mode_top_scores);
-//   };
+  //   const getScores = async () => {
+  //     const response = await fetch("/api/v1/leaderboard/", {
+  //       headers: {
+  //         Authorization: Cookies.get("Authorization"),
+  //       },
+  //     }).catch(handleError);
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not OK!");
+  //     }
+  //     const data = await response.json();
+  //     setScores(data.top_scores);
+  //     setScoresHard(data.hard_mode_top_scores);
+  //   };
 
-//   useEffect(() => {
-//     getScores();
-//   }, []);
-
+  //   useEffect(() => {
+  //     getScores();
+  //   }, []);
 
   //   // Post score at end of game
   //   useEffect(() => {
@@ -283,7 +275,6 @@ function Game(props) {
         <div className=" flex  justify-center mt-32 ">
           <div className="container rounded-2xl mt-10 flex justify-center pt-10  pb-10">
             You have already played your round for the day.
-            
           </div>
         </div>
       </>

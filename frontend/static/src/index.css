@@ -19,7 +19,7 @@ code {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-family: "Times New Roman", Times, serif;
   
   
 }
@@ -47,46 +47,50 @@ code {
 
 
 .btn, .articleBtn {
-  --hue: var(--hue-neutral);
-  border: 1px solid green;
-  color: black;
+  
   background-color: ;
   border-radius: 5px;
   padding: 5px 10px;
   border-width: medium;
  
-  outline: ;
+  outline: none ;
+}
+
+.articleBtn{
+  border: 2px solid green;
 }
 
 .articleBtn2 {
   --hue: var(--hue-neutral);
   border: 1px solid red;
   color: black;
-  background-color: ;
+  background-color: red ;
   border-radius: 5px;
   padding: 5px 10px;
   border-width: medium;
  
 }
 
+
+
 .article-cards {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   
 }
 
+.answer-buttons {
+  color: white;
+  border: 3px solid aqua;
+}
+
 
 .btn:hover {
   border-color: white;
+ 
 }
 
-.btn.correct {
-  --hue: var(--hue-correct);
-  color: black;
-}
 
-.btn.wrong {
-  --hue: var(--hue-wrong);
-}
+
 
 blockquote.twitter-tweet {
   display: inline-block;
@@ -125,6 +129,14 @@ blockquote.twitter-tweet a:focus {
 .leaderboard {
   background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
   
+}
+
+.correct:focus{
+  border-color: green;
+}
+
+.incorrect:focus{
+  border-color: red;
 }
 /* .hide {
   display: none;

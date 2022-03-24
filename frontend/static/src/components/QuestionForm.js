@@ -69,7 +69,7 @@ function QuestionForm(props) {
   };
 
   return (
-    <div className="h-screen font-sans">
+    <div className="h-screen ">
       <div className="container mx-auto h-full flex justify-center items-center">
         <div className="">
           <form onSubmit={state.id ? handleUpdate : handleSubmit}>
