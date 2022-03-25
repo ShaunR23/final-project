@@ -22,14 +22,15 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
-        <Route path="question-form" element={<QuestionForm />} />
-        <Route path="question-list" element={<Questions />} />
-        <Route path="admin-view" element={<AdminView />} />
-        <Route path="game" element={<Game />} />
-        <Route path="leaderboard" element={<Leaderboard />} />
-        
+          <Route path="" element={<Game />} />
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="question-form" element={<QuestionForm />} />
+          <Route path="question-list" element={<Questions />} />
+          <Route path="admin-view" element={<AdminView />} />
+          
+          <Route path="leaderboard" element={<Leaderboard />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>

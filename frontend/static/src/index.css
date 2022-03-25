@@ -1,15 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -19,9 +18,8 @@ code {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
- font-family: "Times New Roman", Times, serif;
-  
-  
+  font-family: 'Chivo', sans-serif;
+  font-weight: 400;
 }
 
 /* :root {
@@ -32,8 +30,7 @@ code {
 
 .container {
   /* width: 800px; */
-  
-  
+
   /* background-color:#C0C0C0 ; */
   background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
   border-radius: 5px;
@@ -41,19 +38,17 @@ code {
   box-shadow: 0 0 10px 2px;
 }
 
-.home1, .home2 {
+.home1,
+.home2 {
   background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
 }
 
-
 .articleBtn {
-  
- 
   border-radius: 5px;
   padding: 5px 10px;
   border-width: medium;
- 
-  outline: none ;
+
+  outline: none;
 }
 
 .btn {
@@ -61,29 +56,24 @@ code {
   padding: 5px 10px;
   border-width: medium;
   border-color: teal;
-  outline: none 
+  outline: none;
 }
 
-.articleBtn{
+.articleBtn {
   border: 2px solid green;
 }
 
 .articleBtn2 {
- 
   border: 1px solid red;
   color: black;
-  background-color: red ;
+  background-color: red;
   border-radius: 5px;
   padding: 5px 10px;
   border-width: medium;
- 
 }
-
-
 
 .article-cards {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  
 }
 
 .answer-buttons {
@@ -91,14 +81,9 @@ code {
   border: 3px solid aqua;
 }
 
-
 .btn:hover {
   border-color: white;
- 
 }
-
-
-
 
 blockquote.twitter-tweet {
   display: inline-block;
@@ -136,29 +121,34 @@ blockquote.twitter-tweet a:focus {
 
 .leaderboard {
   background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
-  
 }
 
-.correct:focus{
+.correct:focus {
   border-color: green;
 }
 
-.incorrect:focus{
+.incorrect:focus {
   border-color: red;
 }
 /* .hide {
   display: none;
 } */
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-  .leaderboard-table{
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .leaderboard-table {
     display: flex;
     flex-direction: column;
   }
+}
 
+button.btn.correct {
+  background: green;
+}
+
+button.btn.incorrect {
+  background: red;
 }

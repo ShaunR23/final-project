@@ -5,25 +5,26 @@ import Cookies from "js-cookie";
 function Board({ title, scores }) {
   const tableRows = scores.map((score, index) => (
     <tr>
-      <td className="border px-8 py-4">{index + 1}</td>
-      <td className="border px-8 py-4">{score.username}</td>
-      <td className="border px-8 py-4">{score.score}</td>
+      <td className="text-lg border px-8 py-4">{index + 1}</td>
+      <td className="text-lg border px-8 py-4">{score.username}</td>
+      <td className="text-lg border px-8 py-4">{score.score}</td>
     </tr>
   ));
 
   return (
     <>
-      <h2 className=" flex justify-center text-2xl font-semibold font-serif tex-decoration-line: underline mt-3">
+      <h2 className=" flex justify-center text-3xl  tex-decoration-line: underline mt-3">
         {title}
       </h2>
       <div className=" flex justify-center mt-3">
         <table className="items-center shadow-lg border-collapse container">
           <tbody>
             <tr>
-              <th className=" border text-left px-8 py-4">Rank</th>
-              <th className=" border text-left px-8 py-4">User</th>
-              <th className=" border text-left px-8 py-4">Score</th>
+              <th className="text-xl border text-left px-8 py-4">Rank</th>
+              <th className="text-xl border text-left px-8 py-4">User</th>
+              <th className="text-xl border text-left px-8 py-4">Score</th>
             </tr>
+           
             {tableRows}
           </tbody>
         </table>

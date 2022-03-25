@@ -171,11 +171,11 @@ class UserScoreHardListAPIView(generics.ListCreateAPIView):
 @api_view(['GET'])
 def get_leaderboard(request):
     hard_mode_top_scores = Score.objects.filter(
-        hard_mode=True).order_by('-score')[:10]
+        hard_mode=True).order_by('-score')[:5]
 
     hard_mode = ScoreSerializer(hard_mode_top_scores, many=True)
 
-    top_scores = Score.objects.filter(hard_mode=False).order_by('-score')[:10]
+    top_scores = Score.objects.filter(hard_mode=False).order_by('-score')[:5]
     scores = ScoreSerializer(top_scores, many=True)
 
     return Response({"hard_mode_top_scores": hard_mode.data, "top_scores": scores.data})

@@ -12,7 +12,10 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
   const [counter, setCounter] = useState(15);
   const timer = useRef(null);
 
-  const handleClick = ({ event,guess }) => {
+  const handleClick = ({ event, guess }) => {
+    const newClassName = guess ? "correct" : "incorrect";
+    event.target.classList.add(newClassName);
+    setTimeout(() => event.target.classList.remove(newClassName), 2000);
     handleAnswer({ guess, counter });
     clearInterval(timer.current);
   };

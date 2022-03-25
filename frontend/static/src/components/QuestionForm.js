@@ -16,6 +16,7 @@ const INITIAL_STATE = {
 function QuestionForm(props) {
   const [phase, setPhase] = useState("state.phase");
   const [state, setState] = useState({ ...props });
+  
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -109,7 +110,7 @@ function QuestionForm(props) {
             <div className="mb-4">
               <label
                 htmlFor="question"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="block mb-2  text-gray-900 dark:text-gray-300"
               >
                 Question
               </label>
@@ -118,7 +119,7 @@ function QuestionForm(props) {
                 id="question"
                 name="question"
                 className="shadow-sm bg-gray-50 border border-dark text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                placeholder="question"
+                
                 onChange={handleInput}
                 value={state.question}
               />
@@ -126,7 +127,7 @@ function QuestionForm(props) {
             <div className="mb-4">
               <label
                 htmlFor="incorrect-answer1"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="block mb-2  "
               >
                 Incorrect Answer
               </label>
@@ -142,7 +143,7 @@ function QuestionForm(props) {
             <div className="mb-4">
               <label
                 htmlFor="incorrect-answer2"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="block mb-2 text-gray-900 dark:text-gray-300"
               >
                 Incorrect Answer
               </label>
@@ -158,7 +159,7 @@ function QuestionForm(props) {
             <div className="mb-4">
               <label
                 htmlFor="incorrect-answer3"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="block mb-2 text-gray-900 dark:text-gray-300"
               >
                 Incorrect Answer
               </label>
@@ -174,7 +175,7 @@ function QuestionForm(props) {
             <div className="mb-6">
               <label
                 htmlFor="correct-answer"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="block mb-2  text-gray-900 dark:text-gray-300"
               >
                 Correct Answer
               </label>
@@ -190,8 +191,9 @@ function QuestionForm(props) {
 
             <button
               type="button"
-              onClick={handleSave}
+              onClick= {handleSave}
               value="DRAFT"
+              data-dismiss="modal"
               className="text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center dark:bg-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Save

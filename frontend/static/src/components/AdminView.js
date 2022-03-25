@@ -10,8 +10,6 @@ function AdminView(props) {
 
   // const [state, setState] = useState({ ...props });
 
-
-
   useEffect(() => {
     const getQuestions = async () => {
       const response = await fetch("/api/v1/admin-view/").catch(handleError);
@@ -25,12 +23,11 @@ function AdminView(props) {
     getQuestions();
   }, []);
 
-  const publishQuestion = async (e) => {
-    const { name, value } = e.target;
+  const publishQuestion = async (e, id) => {
     const data = { ...props, phase: e.target.value };
 
     const options = {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "X-CSRFToken": Cookies.get("csrftoken"),
         "Content-Type": "application/json",
@@ -38,13 +35,17 @@ function AdminView(props) {
       body: JSON.stringify(data),
     };
 
-    const response = await fetch(`/api/v1/admin-view/${data.id}`, options);
+    const response = await fetch(`/api/v1/admin-view/${id}`, options);
+    const json = await response.json();
 
-  //   setState((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-   };
+    const updatedQuestions = [...props.questions];
+    const index = updatedQuestions.findIndex(
+      (question) => question.id === json.id
+    );
+
+    updatedQuestions[index] = json;
+    setQuestions(updatedQuestions);
+  };
 
   const handleDelete = async (id) => {
     const options = {
@@ -54,7 +55,8 @@ function AdminView(props) {
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
     };
-
+    
+    const json = await response.json();
     const response = await fetch(`/api/v1/admin-view/${id}`, options).catch(
       handleError
     );
@@ -63,7 +65,14 @@ function AdminView(props) {
       throw new Error("Network response was not OK");
     }
 
-    
+    const updatedQuestions = [...props.questions];
+    const index = updatedQuestions.findIndex(
+      (question) => question.id === json.id
+    );
+
+    updatedQuestions[index] = json;
+    setQuestions(updatedQuestions);
+
     // const viewAfterDelete = view.filter((question) => {
     //   return question.id !== id;
     // });
@@ -95,7 +104,7 @@ function AdminView(props) {
             name="accept"
             type="submit"
             value="ACCEPTED"
-            onClick={() => publishQuestion(question.id)}
+            onClick={(e) => publishQuestion(e, question.id)}
           >
             Accept
           </button>
