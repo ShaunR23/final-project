@@ -26,8 +26,8 @@ TWITTER_API_SECRET_KEY = os.environ["TWITTER_API_SECRET_KEY"]
 # BEARER_TOKEN = os.environ["BEARER_TOKEN"]
 # ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 # ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
-
-TWITTER_URL_CALLBACK = os.environ["TWITTER_URL_CALLBACK"]
+TWITTER_URL_CALLBACK = 'https://final-project-sr23.herokuapp.com/'
+# TWITTER_URL_CALLBACK = os.environ["TWITTER_URL_CALLBACK"]
 DOMAIN = os.environ['DOMAIN']
 
 

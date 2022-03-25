@@ -69,7 +69,7 @@ function Register(props) {
             className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg"
           >
             <div className="mb-4">
-              <label className="font-bold text-gray-darker block mb-2">
+              <label className=" text-gray-darker block mb-2">
                 Choose a Username
               </label>
               <input
@@ -85,7 +85,7 @@ function Register(props) {
               />
             </div>
             <div className="mb-4">
-              <label className="font-bold text-gray-darker block mb-2">
+              <label className=" text-gray-darker block mb-2">
                 Email
               </label>
               <input
@@ -102,7 +102,7 @@ function Register(props) {
             </div>
 
             <div className="mb-4">
-              <label className="font-bold text-gray-darker block mb-2">
+              <label className=" text-gray-darker block mb-2">
                 Choose your Password
               </label>
               <input
@@ -119,7 +119,7 @@ function Register(props) {
             </div>
 
             <div className="mb-4">
-              <label className="font-bold text-gray-darker block mb-2">
+              <label className=" text-gray-darker block mb-2">
                 Type Password Again
               </label>
               <input
@@ -138,13 +138,13 @@ function Register(props) {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg-gray-light hover:bg-teal  font- text-dark-green border py-2 px-4 rounded"
+                className="bg-reg-green  text-white border py-2 px-4 rounded"
               >
                 Create Account
               </button>
 
               <a
-                className="no-underline m-2  align-baseline font-bold text-sm text-blue hover:text-blue-dark"
+                className="no-underline m-2  align-baseline text-reg-green text-sm  hover:text-blue-dark"
                 href="#"
               >
                 Already Registered? Login Here!!

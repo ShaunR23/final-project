@@ -50,7 +50,7 @@ function Login() {
     setAuth(true);
     setAdmin(data.is_superuser);
     setState(INITIAL_STATE);
-    navigate("/game", { replace: true });
+    navigate("", { replace: true });
   };
 
   const twitterAuth = async () => {
