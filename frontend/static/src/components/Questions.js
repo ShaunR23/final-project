@@ -88,7 +88,7 @@ function Question({
             Correct Answer = {correctAnswer}
           </p>
           <Modal show={show} onHide={handleClose}>
-            {/* <Modal.Body> */}
+            <Modal.Body className='myModal'>
             <QuestionForm
               question={question}
               incorrectAnswer1={incorrectAnswer1}
@@ -101,7 +101,7 @@ function Question({
               setQuestions={setQuestions}
             />
 
-            {/* </Modal.Body> */}
+            </Modal.Body>
             <button
               className="btn h-100% text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-0 mt-0 text-center"
               variant="primary"

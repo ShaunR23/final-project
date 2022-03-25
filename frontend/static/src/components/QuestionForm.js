@@ -16,6 +16,8 @@ const INITIAL_STATE = {
 function QuestionForm(props) {
   const [phase, setPhase] = useState("state.phase");
   const [state, setState] = useState({ ...props });
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
   
 
   const handleInput = (e) => {
@@ -191,9 +193,9 @@ function QuestionForm(props) {
 
             <button
               type="button"
-              onClick= {handleSave}
+              onClick={()=> {handleSave() ; handleClose()}}
               value="DRAFT"
-              data-dismiss="modal"
+              data-dismiss="myModal"
               className="text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center dark:bg-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Save

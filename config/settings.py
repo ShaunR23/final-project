@@ -26,7 +26,7 @@ TWITTER_API_SECRET_KEY = os.environ["TWITTER_API_SECRET_KEY"]
 # BEARER_TOKEN = os.environ["BEARER_TOKEN"]
 # ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 # ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
-TWITTER_URL_CALLBACK = 'https://final-project-sr23.herokuapp.com/'
+TWITTER_URL_CALLBACK = 'https://final-project-sr23.herokuapp.com/login/'
 # TWITTER_URL_CALLBACK = os.environ["TWITTER_URL_CALLBACK"]
 DOMAIN = os.environ['DOMAIN']
 
@@ -97,6 +97,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',
+    'http://final-project-sr23.herokuapp.com',
 ]
 
 ROOT_URLCONF = 'config.urls'

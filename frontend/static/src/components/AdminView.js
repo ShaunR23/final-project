@@ -43,7 +43,7 @@ function AdminView(props) {
       (question) => question.id === json.id
     );
 
-    updatedQuestions[index] = json;
+    
     setQuestions(updatedQuestions);
   };
 
@@ -55,11 +55,12 @@ function AdminView(props) {
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
     };
+
     
-    const json = await response.json();
     const response = await fetch(`/api/v1/admin-view/${id}`, options).catch(
       handleError
     );
+    const json = await response.json();
 
     if (!response.ok) {
       throw new Error("Network response was not OK");
