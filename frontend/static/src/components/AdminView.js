@@ -38,11 +38,10 @@ function AdminView(props) {
     const response = await fetch(`/api/v1/admin-view/${id}`, options);
     const json = await response.json();
 
-    const updatedQuestions = [...props.questions];
-    const index = updatedQuestions.findIndex(
-      (question) => question.id === json.id
-    );
+    const updatedQuestions = [...questions];
+    const index = updatedQuestions.findIndex((question) => question.id === id);
 
+    updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
   };
 
