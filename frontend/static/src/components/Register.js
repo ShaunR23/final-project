@@ -23,8 +23,6 @@ function Register(props) {
   };
 
   const handleSubmit = async () => {
-  
-
     if (state.password1 !== state.password2) {
       alert("Passwords do not match!!");
     }
@@ -85,9 +83,7 @@ function Register(props) {
               />
             </div>
             <div className="mb-4">
-              <label className=" text-gray-darker block mb-2">
-                Email
-              </label>
+              <label className=" text-gray-darker block mb-2">Email</label>
               <input
                 className="inputField"
                 type="email"

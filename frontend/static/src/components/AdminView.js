@@ -43,7 +43,6 @@ function AdminView(props) {
       (question) => question.id === json.id
     );
 
-    
     setQuestions(updatedQuestions);
   };
 
@@ -56,22 +55,19 @@ function AdminView(props) {
       },
     };
 
-    
     const response = await fetch(`/api/v1/admin-view/${id}`, options).catch(
       handleError
     );
-    const json = await response.json();
+    // const json = await response.json();
 
     if (!response.ok) {
       throw new Error("Network response was not OK");
     }
 
-    const updatedQuestions = [...props.questions];
-    const index = updatedQuestions.findIndex(
-      (question) => question.id === json.id
-    );
+    const updatedQuestions = [...questions];
+    const index = updatedQuestions.findIndex((question) => question.id === id);
 
-    updatedQuestions[index] = json;
+    updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
 
     // const viewAfterDelete = view.filter((question) => {

@@ -18,7 +18,7 @@ code {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Chivo', sans-serif;
+  font-family: "Chivo", sans-serif;
   font-weight: 400;
 }
 
@@ -151,4 +151,12 @@ button.btn.correct {
 
 button.btn.incorrect {
   background: red;
+}
+
+/* .modal-content {
+  background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
+} */
+
+.modal-body {
+  padding: 0 !important;
 }

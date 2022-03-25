@@ -32,7 +32,7 @@ function Login() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSFRToken": Cookies.get("csfrtoken"),
+        "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: JSON.stringify(state),
     };
@@ -88,7 +88,7 @@ function Login() {
     setAuth(true);
     setAdmin(data.is_superuser);
     setState(INITIAL_STATE);
-    navigate("/game", { replace: true });
+    navigate("/", { replace: true });
   };
 
   const oauth_token = searchParams.get("oauth_token");

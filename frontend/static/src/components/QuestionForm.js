@@ -18,7 +18,6 @@ function QuestionForm(props) {
   const [state, setState] = useState({ ...props });
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
-  
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -26,10 +25,8 @@ function QuestionForm(props) {
     setState((prevState) => ({
       ...prevState,
       [name]: value,
-      
     }));
   };
-  
 
   const handleSave = async (e) => {
     const data = { ...state, phase: e.target.value };
@@ -51,6 +48,9 @@ function QuestionForm(props) {
       },
       body: JSON.stringify(data),
     };
+    if (props.setShow) {
+      props.setShow(false);
+    }
 
     const response = await fetch(url, options);
     const json = await response.json();
@@ -121,16 +121,12 @@ function QuestionForm(props) {
                 id="question"
                 name="question"
                 className="shadow-sm bg-gray-50 border border-dark text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                
                 onChange={handleInput}
                 value={state.question}
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="incorrect-answer1"
-                className="block mb-2  "
-              >
+              <label htmlFor="incorrect-answer1" className="block mb-2  ">
                 Incorrect Answer
               </label>
               <input
@@ -193,10 +189,10 @@ function QuestionForm(props) {
 
             <button
               type="button"
-              onClick={()=> {handleSave() ; handleClose()}}
+              onClick={handleSave}
               value="DRAFT"
               data-dismiss="myModal"
-              className="text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center dark:bg-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-dark-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-2"
             >
               Save
             </button>
@@ -205,10 +201,16 @@ function QuestionForm(props) {
               type="button"
               value="SUBMITTED"
               onClick={handleSave}
-              className="text-white bg-dark-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-dark-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-2"
             >
               Submit
             </button>
+
+            {props.setShow && (
+              <button className="text-white bg-dark-green hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" onClick={() => props.setShow(false)}>
+                Close
+              </button>
+            )}
           </form>
         </div>
       </div>

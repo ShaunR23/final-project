@@ -222,7 +222,8 @@ function Game(props) {
   if (!mode) {
     return (
       <div className=" flex flex-column justify-center mt-10 ">
-        <div className="container home1 dark:bg-gray-800 shadow-lg dark:shadow-none rounded-2xl ml mt-32 hover:shadow-xl dark:hover:shadow-dark ">
+      <h1 className='container text-white p-5 text-3xl flex justify-center'>Welcome To Press Start Trivia!!</h1>
+        <div className="container home1 dark:bg-gray-800 shadow-lg dark:shadow-none rounded-2xl ml mt-28 hover:shadow-xl dark:hover:shadow-dark ">
           <div className="flex justify-center">
             <button
               type="button"

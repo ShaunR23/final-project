@@ -14,7 +14,6 @@ function Question({
   id,
   setQuestions,
   questions,
-  
 }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -88,27 +87,20 @@ function Question({
             Correct Answer = {correctAnswer}
           </p>
           <Modal show={show} onHide={handleClose}>
-            <Modal.Body className='myModal'>
-            <QuestionForm
-              question={question}
-              incorrectAnswer1={incorrectAnswer1}
-              incorrectAnswer2={incorrectAnswer2}
-              incorrectAnswer3={incorrectAnswer3}
-              correctAnswer={correctAnswer}
-              phase={phase}
-              id={id}
-              questions={questions}
-              setQuestions={setQuestions}
-            />
-
+            <Modal.Body className="myModal">
+              <QuestionForm
+                question={question}
+                incorrectAnswer1={incorrectAnswer1}
+                incorrectAnswer2={incorrectAnswer2}
+                incorrectAnswer3={incorrectAnswer3}
+                correctAnswer={correctAnswer}
+                phase={phase}
+                id={id}
+                questions={questions}
+                setQuestions={setQuestions}
+                setShow={setShow}
+              />
             </Modal.Body>
-            <button
-              className="btn h-100% text-white bg-dark-green  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-0 mt-0 text-center"
-              variant="primary"
-              onClick={handleClose}
-            >
-              Close
-            </button>
           </Modal>
 
           <button
