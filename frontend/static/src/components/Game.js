@@ -8,17 +8,18 @@ import Cookies from "js-cookie";
 import { TwitterTimelineEmbed, TwitterShareButton } from "react-twitter-embed";
 import { red } from "tailwindcss/colors";
 
-function Question({ question, shuffled_answers, score, handleAnswer }) {
+function Question({ question, shuffled_answers, score, handleAnswer}) {
   const [counter, setCounter] = useState(15);
   const timer = useRef(null);
-
+  
   const handleClick = ({ event, guess }) => {
-    const newClassName = guess ? "correct" : "incorrect";
-    event.target.classList.add(newClassName);
-    setTimeout(() => event.target.classList.remove(newClassName), 2000);
+    // const newClassName = guess ? "correct" : "incorrect";
+    // event.target.classList.add(newClassName);
+    // setTimeout(() => event.target.classList.remove(newClassName), 2000);
     handleAnswer({ guess, counter });
     clearInterval(timer.current);
   };
+
 
   useEffect(() => {
     setCounter(15);
@@ -26,7 +27,8 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
 
   useEffect(() => {
     if (counter === 0) {
-      handleClick(false);
+      handleClick(false)
+      
       return;
     }
     timer.current = setInterval(() => {
@@ -140,6 +142,8 @@ function Game(props) {
     }, 2000);
   };
 
+  
+
   const postScore = () => {
     const hard_mode = mode === "hard" ? true : false;
 
@@ -159,60 +163,6 @@ function Game(props) {
     }
   };
 
-  //   const getScores = async () => {
-  //     const response = await fetch("/api/v1/leaderboard/", {
-  //       headers: {
-  //         Authorization: Cookies.get("Authorization"),
-  //       },
-  //     }).catch(handleError);
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not OK!");
-  //     }
-  //     const data = await response.json();
-  //     setScores(data.top_scores);
-  //     setScoresHard(data.hard_mode_top_scores);
-  //   };
-
-  //   useEffect(() => {
-  //     getScores();
-  //   }, []);
-
-  //   // Post score at end of game
-  //   useEffect(() => {
-  //     if (questionCount > 9) {
-  //       setGameOver(true);
-
-  //       const response = fetch(`/api/v1/user/score/`, options).catch(handleError);
-
-  //     } else if (questionCount < 10) {
-  //       let timer =
-  //         counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-
-  //       if (timer == 0) {
-  //         setTimeout(() => {
-  //           const updatedQuestions = [...questions];
-  //           updatedQuestions.shift();
-  //           setQuestions(updatedQuestions);
-  //           setCounter(15);
-  //           setTotalAnswer(totalAnswer + 1);
-  //           setQuestionCount(questionCount + 1);
-  //           //   alert(revealAnswer);
-  //           setIsCorrect(null);
-  //         }, 2000);
-  //       }
-
-  //       return () => clearInterval(timer);
-  //     }
-  //   }, [counter]);
-
-  //   let trivia = questions.map((question) => (
-  //     <CurrentQuestion
-  //       {...question}
-  //       handleAnswer={handleAnswer}
-  //       counter={counter}
-  //       score={score}
-  //     />
-  //   ));
 
   const generateQuestion = () => {
     const question = questions[0];
