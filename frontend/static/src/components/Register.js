@@ -79,7 +79,7 @@ function Register(props) {
                 required
                 value={state.username}
                 placeholder="Your Username"
-                className="block appearance-none w-full bg-white border border-gray-light hover:border-gray px-2 py-2 rounded shadow"
+                className="border block appearance-none w-full bg-white border border-gray hover:border-gray px-2 py-2 rounded shadow"
               />
             </div>
             <div className="mb-4">
