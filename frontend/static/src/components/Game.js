@@ -13,9 +13,9 @@ function Question({ question, shuffled_answers, score, handleAnswer}) {
   const timer = useRef(null);
   
   const handleClick = ({ event, guess }) => {
-    // const newClassName = guess ? "correct" : "incorrect";
-    // event.target.classList.add(newClassName);
-    // setTimeout(() => event.target.classList.remove(newClassName), 2000);
+    const newClassName = guess ? "correct" : "incorrect";
+    event.target.classList.add(newClassName);
+    setTimeout(() => event.target.classList.remove(newClassName), 2000);
     handleAnswer({ guess, counter });
     clearInterval(timer.current);
   };
@@ -25,9 +25,10 @@ function Question({ question, shuffled_answers, score, handleAnswer}) {
     setCounter(15);
   }, [question]);
 
-  useEffect(() => {
+  useEffect((guess) => {
     if (counter === 0) {
-      handleClick(false)
+      handleAnswer({ guess, counter });
+      
       
       return;
     }
