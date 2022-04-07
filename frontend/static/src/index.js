@@ -1,20 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'flowbite';
-import './index.css';
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
+import "flowbite";
+import "./index.css";
+import App from "./components/App";
+import reportWebVitals from "./reportWebVitals";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Questions from './components/Questions';
-import QuestionForm from './components/QuestionForm';
-import AdminView from './components/AdminView';
-import Game from './components/Game';
-import Home from './components/Home';
-import Leaderboard from './components/Leaderboard';
-import ProfileView from './components/ProfileView';
-import GameHard from './components/Game';
+import Questions from "./components/Questions";
+import QuestionForm from "./components/QuestionForm";
+import AdminView from "./components/AdminView";
+import Game from "./components/Game";
+import Home from "./components/Home";
+import Leaderboard from "./components/Leaderboard";
+import ProfileView from "./components/ProfileView";
+import GameHard from "./components/Game";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render(
@@ -28,14 +28,13 @@ ReactDOM.render(
           <Route path="question-form" element={<QuestionForm />} />
           <Route path="question-list" element={<Questions />} />
           <Route path="admin-view" element={<AdminView />} />
-          
+
           <Route path="leaderboard" element={<Leaderboard />} />
-          
         </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

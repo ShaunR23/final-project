@@ -8,10 +8,10 @@ import Cookies from "js-cookie";
 import { TwitterTimelineEmbed, TwitterShareButton } from "react-twitter-embed";
 import { red } from "tailwindcss/colors";
 
-function Question({ question, shuffled_answers, score, handleAnswer}) {
+function Question({ question, shuffled_answers, score, handleAnswer }) {
   const [counter, setCounter] = useState(15);
   const timer = useRef(null);
-  
+
   const handleClick = ({ event, guess }) => {
     const newClassName = guess ? "correct" : "incorrect";
     event.target.classList.add(newClassName);
@@ -20,24 +20,25 @@ function Question({ question, shuffled_answers, score, handleAnswer}) {
     clearInterval(timer.current);
   };
 
-
   useEffect(() => {
     setCounter(15);
   }, [question]);
 
-  useEffect((guess) => {
-    if (counter === 0) {
-      handleAnswer({ guess, counter });
-      
-      
-      return;
-    }
-    timer.current = setInterval(() => {
-      setCounter((counter) => counter - 1);
-    }, 1000);
+  useEffect(
+    (guess) => {
+      if (counter === 0) {
+        handleAnswer({ guess, counter });
 
-    return () => clearInterval(timer.current);
-  }, [counter]);
+        return;
+      }
+      timer.current = setInterval(() => {
+        setCounter((counter) => counter - 1);
+      }, 1000);
+
+      return () => clearInterval(timer.current);
+    },
+    [counter]
+  );
 
   const answerButtons = shuffled_answers.map((answer, index) => {
     const key = Object.keys(answer)[0];
@@ -143,8 +144,6 @@ function Game(props) {
     }, 2000);
   };
 
-  
-
   const postScore = () => {
     const hard_mode = mode === "hard" ? true : false;
 
@@ -164,7 +163,6 @@ function Game(props) {
     }
   };
 
-
   const generateQuestion = () => {
     const question = questions[0];
     return <Question {...question} handleAnswer={handleAnswer} score={score} />;
@@ -173,7 +171,9 @@ function Game(props) {
   if (!mode) {
     return (
       <div className=" flex flex-column justify-center mt-10 ">
-      <h1 className='container text-white p-5 text-3xl flex justify-center'>Welcome To Press Start Trivia!!</h1>
+        <h1 className="container text-white p-5 text-3xl flex justify-center">
+          Welcome To Press Start Trivia!!
+        </h1>
         <div className="container home1 dark:bg-gray-800 shadow-lg dark:shadow-none rounded-2xl ml mt-28 hover:shadow-xl dark:hover:shadow-dark ">
           <div className="flex justify-center">
             <button

@@ -24,7 +24,7 @@ function Board({ title, scores }) {
               <th className="text-xl border text-left px-8 py-4">User</th>
               <th className="text-xl border text-left px-8 py-4">Score</th>
             </tr>
-           
+
             {tableRows}
           </tbody>
         </table>
