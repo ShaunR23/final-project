@@ -8,16 +8,22 @@ import Cookies from "js-cookie";
 import { TwitterTimelineEmbed, TwitterShareButton } from "react-twitter-embed";
 import { red } from "tailwindcss/colors";
 
-function Question({ question, shuffled_answers, score, handleAnswer }) {
+function Question({ question, answer, shuffled_answers, score, handleAnswer }) {
   const [counter, setCounter] = useState(15);
+  const [questionRecap, setQuestionRecap] = useState([])
+  const [answerRecap, setAnswerRecap] = useState([])
   const timer = useRef(null);
 
+console.log(answerRecap)
+console.log(questionRecap)
   const handleClick = ({ event, guess }) => {
     const newClassName = guess ? "correct" : "incorrect";
     event.target.classList.add(newClassName);
     setTimeout(() => event.target.classList.remove(newClassName), 2000);
     handleAnswer({ guess, counter });
     clearInterval(timer.current);
+    questionRecap.push(question)
+    answerRecap.push(answer)
   };
 
   useEffect(() => {
@@ -28,6 +34,10 @@ function Question({ question, shuffled_answers, score, handleAnswer }) {
     (guess) => {
       if (counter === 0) {
         handleAnswer({ guess, counter });
+        console.log(answer)
+        questionRecap.push(question)
+        answerRecap.push(answer)
+
 
         return;
       }
@@ -91,6 +101,9 @@ function Game(props) {
   const [score, setScore] = useState(0);
 
   const { isAuth } = useOutletContext();
+
+  
+console.log(questions)
 
   const handleSelection = (selection) => {
     setMode(selection);
@@ -165,7 +178,8 @@ function Game(props) {
 
   const generateQuestion = () => {
     const question = questions[0];
-    return <Question {...question} handleAnswer={handleAnswer} score={score} />;
+    const answer = questions[0].correctAnswer
+    return <Question {...question} answer = {answer} handleAnswer={handleAnswer} score={score} />;
   };
 
   if (!mode) {
