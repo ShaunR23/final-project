@@ -50,6 +50,12 @@ console.log(questionRecap)
     [counter]
   );
 
+const gameRecap = () => {
+    return( 
+<div>answerRecap</div>
+    )}
+  
+
   const answerButtons = shuffled_answers.map((answer, index) => {
     const key = Object.keys(answer)[0];
     return (
@@ -87,10 +93,12 @@ console.log(questionRecap)
   );
 }
 
-function Game(props) {
+function Game(props, gameRecap) {
   const [mode, setMode] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [alreadyPlayed, setAlreadyPlayed] = useState(false);
+  const [answerRecap, setAnswerRecap] = useState([])
+  const [questionRecap, setQuestionRecap] = useState([])
 
   const [questions, setQuestions] = useState(props.questions);
   const [fetchingData, setFetchingData] = useState(false);
@@ -179,9 +187,14 @@ console.log(questions)
   const generateQuestion = () => {
     const question = questions[0];
     const answer = questions[0].correctAnswer
+    const questionArr = questions[0].question
+    
+    answerRecap.push(answer)
+    questionRecap.push(questionArr)
+    console.log(answerRecap)
     return <Question {...question} answer = {answer} handleAnswer={handleAnswer} score={score} />;
   };
-
+ 
   if (!mode) {
     return (
       <div className=" flex flex-column justify-center mt-10 ">
@@ -209,17 +222,24 @@ console.log(questions)
       </div>
     );
   }
-
+let uniqueAnswers = [...new Set(answerRecap)]
+let uniqueQuestions = [...new Set(questionRecap)]
   if (gameOver) {
     return (
-      <div className=" w-screen h-screen flex justify-center items-center">
+<>
+
+
+      <div className=" w-screen h-32 mb-28 mt-28 flex justify-center items-center">
         <div className="container flex justify-center">
-          <div id="question-container" className="hide ">
-            <div id="question"></div>
+          <div id="score-container" className="hide ">
+            <div id="score-recap"></div>
             <div className="leading-10 text-white mb-3">
               You got {correctAnswers} of {totalQuestions} correct!! <br></br>
               Score: {score}
             </div>
+
+
+            
 
             <TwitterShareButton
               score={score}
@@ -235,6 +255,41 @@ console.log(questions)
           </div>
         </div>
       </div>
+
+      <div className=" w-screen  flex justify-center items-center">
+        <div className="container flex justify-center">
+          <div id="recap-container" className="hide ">
+            <div id="question-recap"></div>
+            <div className="leading-10 text-white mb-3">
+            <h2 className ="text-center text-xl text-reg-blue">Question Recap</h2>
+
+            {/* Needs to be refactored using map */}
+            <div>1.) {uniqueQuestions[0]} {uniqueAnswers[0]}</div>
+            
+            <div>2.) {uniqueQuestions[1]} {uniqueAnswers[1]}</div>
+            
+            <div>3.) {uniqueQuestions[2]} {uniqueAnswers[2]}</div>
+            
+            <div>4.) {uniqueQuestions[3]} {uniqueAnswers[3]}</div>
+            
+            <div>5.) {uniqueQuestions[4]} {uniqueAnswers[4]}</div>
+            
+            <div>6.) {uniqueQuestions[5]} {uniqueAnswers[5]}</div>
+            
+            <div>7.) {uniqueQuestions[6]} {uniqueAnswers[6]}</div>
+            
+            <div>8.) {uniqueQuestions[7]} {uniqueAnswers[7]}</div>
+           
+            <div>9.) {uniqueQuestions[8]} {uniqueAnswers[8]}</div>
+           
+            <div>10.) {uniqueQuestions[9]} {uniqueAnswers[9]}</div>
+           
+            
+            </div>
+          </div>
+          </div>
+          </div>
+      </>
     );
   }
 
