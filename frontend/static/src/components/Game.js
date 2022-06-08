@@ -224,6 +224,16 @@ console.log(questions)
   }
 let uniqueAnswers = [...new Set(answerRecap)]
 let uniqueQuestions = [...new Set(questionRecap)]
+
+function recapQ(){
+  return uniqueQuestions.map((uniqueQuestions) => <div>{uniqueQuestions}</div>)
+}
+
+function recapA(){
+  return uniqueAnswers.map((uniqueAnswers) => <div>{uniqueAnswers}</div>)
+}
+
+
   if (gameOver) {
     return (
 <>
@@ -260,13 +270,15 @@ let uniqueQuestions = [...new Set(questionRecap)]
         <div className="container flex justify-center">
           <div id="recap-container" className="hide ">
             <div id="question-recap"></div>
-            <div className="leading-10 text-white mb-3">
-            <h2 className ="text-center text-xl text-reg-blue">Question Recap</h2>
+            <h2 className ="text-center text-xl text-reg-blue pb-">Question Recap</h2>
+            <div className="leading-10 text-white mb-3 flex">
+            
 
             {/* Needs to be refactored using map */}
-            <div>1.) {uniqueQuestions[0]} {uniqueAnswers[0]}</div>
+            <div>{recapQ()}</div>  
+            <div>{recapA()} </div>
             
-            <div>2.) {uniqueQuestions[1]} {uniqueAnswers[1]}</div>
+            {/* <div>2.) {uniqueQuestions[1]} {uniqueAnswers[1]}</div>
             
             <div>3.) {uniqueQuestions[2]} {uniqueAnswers[2]}</div>
             
@@ -283,7 +295,7 @@ let uniqueQuestions = [...new Set(questionRecap)]
             <div>9.) {uniqueQuestions[8]} {uniqueAnswers[8]}</div>
            
             <div>10.) {uniqueQuestions[9]} {uniqueAnswers[9]}</div>
-           
+            */}
             
             </div>
           </div>
