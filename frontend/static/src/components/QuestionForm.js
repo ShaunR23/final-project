@@ -76,34 +76,6 @@ function QuestionForm(props) {
     }
   };
 
-  // const handleUpdate = async (e) => {
-  //   e.preventDefault();
-  //   console.log("event", e);
-  //   const data = { ...state };
-  //   delete data.id;
-
-  //   // const formData = new FormData();
-  //   // formData.append("question", state.question);
-  //   // formData.append("incorrectAnswer1", state.incorrectAnswer1);
-  //   // formData.append("incorrectAnswer2", state.incorrectAnswer2);
-  //   // formData.append("incorrectAnswer3", state.incorrectAnswer3);
-  //   // formData.append("correctAnswer", state.correctAnswer);
-
-  //   // const options = {
-  //   //   method: "PUT",
-  //   //   headers: {
-  //   //     "X-CSRFToken": Cookies.get("csrftoken"),
-  //   //     Authorization: Cookies.get("Authorization"),
-  //   //   },
-  //   //   body: formData,
-  //   // };
-  //   // state.phase = "SUBMIT";
-  //   // await fetch(
-  //   //   `/api/v1/user/trivia-list/${state.id}/`,
-  //   //   options.catch(handleError)
-  //   // );
-  // };
-
   return (
     <div className="h-screen ">
       <div className="container mx-auto h-full flex justify-center items-center">

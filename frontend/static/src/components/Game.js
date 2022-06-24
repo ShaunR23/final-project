@@ -10,20 +10,20 @@ import { red } from "tailwindcss/colors";
 
 function Question({ question, answer, shuffled_answers, score, handleAnswer }) {
   const [counter, setCounter] = useState(15);
-  const [questionRecap, setQuestionRecap] = useState([])
-  const [answerRecap, setAnswerRecap] = useState([])
+  const [questionRecap, setQuestionRecap] = useState([]);
+  const [answerRecap, setAnswerRecap] = useState([]);
   const timer = useRef(null);
 
-console.log(answerRecap)
-console.log(questionRecap)
+  console.log(answerRecap);
+  console.log(questionRecap);
   const handleClick = ({ event, guess }) => {
     const newClassName = guess ? "correct" : "incorrect";
     event.target.classList.add(newClassName);
     setTimeout(() => event.target.classList.remove(newClassName), 2000);
     handleAnswer({ guess, counter });
     clearInterval(timer.current);
-    questionRecap.push(question)
-    answerRecap.push(answer)
+    questionRecap.push(question);
+    answerRecap.push(answer);
   };
 
   useEffect(() => {
@@ -34,10 +34,9 @@ console.log(questionRecap)
     (guess) => {
       if (counter === 0) {
         handleAnswer({ guess, counter });
-        console.log(answer)
-        questionRecap.push(question)
-        answerRecap.push(answer)
-
+        console.log(answer);
+        questionRecap.push(question);
+        answerRecap.push(answer);
 
         return;
       }
@@ -50,11 +49,9 @@ console.log(questionRecap)
     [counter]
   );
 
-const gameRecap = () => {
-    return( 
-<div>answerRecap</div>
-    )}
-  
+  const gameRecap = () => {
+    return <div>answerRecap</div>;
+  };
 
   const answerButtons = shuffled_answers.map((answer, index) => {
     const key = Object.keys(answer)[0];
@@ -97,8 +94,8 @@ function Game(props, gameRecap) {
   const [mode, setMode] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [alreadyPlayed, setAlreadyPlayed] = useState(false);
-  const [answerRecap, setAnswerRecap] = useState([])
-  const [questionRecap, setQuestionRecap] = useState([])
+  const [answerRecap, setAnswerRecap] = useState([]);
+  const [questionRecap, setQuestionRecap] = useState([]);
 
   const [questions, setQuestions] = useState(props.questions);
   const [fetchingData, setFetchingData] = useState(false);
@@ -110,8 +107,7 @@ function Game(props, gameRecap) {
 
   const { isAuth } = useOutletContext();
 
-  
-console.log(questions)
+  console.log(questions);
 
   const handleSelection = (selection) => {
     setMode(selection);
@@ -186,15 +182,22 @@ console.log(questions)
 
   const generateQuestion = () => {
     const question = questions[0];
-    const answer = questions[0].correctAnswer
-    const questionArr = questions[0].question
-    
-    answerRecap.push(answer)
-    questionRecap.push(questionArr)
-    console.log(answerRecap)
-    return <Question {...question} answer = {answer} handleAnswer={handleAnswer} score={score} />;
+    const answer = questions[0].correctAnswer;
+    const questionArr = questions[0].question;
+
+    answerRecap.push(answer);
+    questionRecap.push(questionArr);
+    console.log(answerRecap);
+    return (
+      <Question
+        {...question}
+        answer={answer}
+        handleAnswer={handleAnswer}
+        score={score}
+      />
+    );
   };
- 
+
   if (!mode) {
     return (
       <div className=" flex flex-column justify-center mt-10 ">
@@ -222,85 +225,60 @@ console.log(questions)
       </div>
     );
   }
-let uniqueAnswers = [...new Set(answerRecap)]
-let uniqueQuestions = [...new Set(questionRecap)]
+  let uniqueAnswers = [...new Set(answerRecap)];
+  let uniqueQuestions = [...new Set(questionRecap)];
 
-function recapQ(){
-  return uniqueQuestions.map((uniqueQuestions) => <div>{uniqueQuestions}</div>)
-}
+  function recapQ() {
+    return uniqueQuestions.map((uniqueQuestions) => (
+      <div>{uniqueQuestions}</div>
+    ));
+  }
 
-function recapA(){
-  return uniqueAnswers.map((uniqueAnswers) => <div>{uniqueAnswers}</div>)
-}
-
+  function recapA() {
+    return uniqueAnswers.map((uniqueAnswers) => <div>{uniqueAnswers}</div>);
+  }
 
   if (gameOver) {
     return (
-<>
+      <>
+        <div className=" w-screen h-32 mb-28 mt-28 flex justify-center items-center">
+          <div className="container flex justify-center">
+            <div id="score-container" className="hide ">
+              <div id="score-recap"></div>
+              <div className="leading-10 text-white mb-3">
+                You got {correctAnswers} of {totalQuestions} correct!! <br></br>
+                Score: {score}
+              </div>
 
-
-      <div className=" w-screen h-32 mb-28 mt-28 flex justify-center items-center">
-        <div className="container flex justify-center">
-          <div id="score-container" className="hide ">
-            <div id="score-recap"></div>
-            <div className="leading-10 text-white mb-3">
-              You got {correctAnswers} of {totalQuestions} correct!! <br></br>
-              Score: {score}
+              <TwitterShareButton
+                score={score}
+                correctAnswers={correctAnswers}
+                totalQuestions={totalQuestions}
+                url={"https://final-project-sr23.herokuapp.com/"}
+                options={{
+                  text: `You got ${correctAnswers} out of ${totalQuestions} correct for a score of ${score}`,
+                  via: "PressStartTrivia",
+                  size: "large",
+                }}
+              />
             </div>
-
-
-            
-
-            <TwitterShareButton
-              score={score}
-              correctAnswers={correctAnswers}
-              totalQuestions={totalQuestions}
-              url={"https://final-project-sr23.herokuapp.com/"}
-              options={{
-                text: `You got ${correctAnswers} out of ${totalQuestions} correct for a score of ${score}`,
-                via: "PressStartTrivia",
-                size: "large",
-              }}
-            />
           </div>
         </div>
-      </div>
 
-      <div className=" w-screen  flex justify-center items-center">
-        <div className="container flex justify-center">
-          <div id="recap-container" className="hide ">
-            <div id="question-recap"></div>
-            <h2 className ="text-center text-xl text-reg-blue pb-">Question Recap</h2>
-            <div className="leading-10 text-white mb-3 flex">
-            
-
-            {/* Needs to be refactored using map */}
-            <div>{recapQ()}</div>  
-            <div>{recapA()} </div>
-            
-            {/* <div>2.) {uniqueQuestions[1]} {uniqueAnswers[1]}</div>
-            
-            <div>3.) {uniqueQuestions[2]} {uniqueAnswers[2]}</div>
-            
-            <div>4.) {uniqueQuestions[3]} {uniqueAnswers[3]}</div>
-            
-            <div>5.) {uniqueQuestions[4]} {uniqueAnswers[4]}</div>
-            
-            <div>6.) {uniqueQuestions[5]} {uniqueAnswers[5]}</div>
-            
-            <div>7.) {uniqueQuestions[6]} {uniqueAnswers[6]}</div>
-            
-            <div>8.) {uniqueQuestions[7]} {uniqueAnswers[7]}</div>
-           
-            <div>9.) {uniqueQuestions[8]} {uniqueAnswers[8]}</div>
-           
-            <div>10.) {uniqueQuestions[9]} {uniqueAnswers[9]}</div>
-            */}
-            
+        <div className=" w-screen  flex justify-center items-center">
+          <div className="container flex justify-center">
+            <div id="recap-container" className="hide ">
+              <div id="question-recap"></div>
+              <h2 className="text-center text-xl text-reg-blue pb-">
+                Question Recap
+              </h2>
+              <div className="leading-10 text-white mb-3 flex">
+                <div>{recapQ()}</div>
+                <div>{recapA()} </div>
+              </div>
             </div>
           </div>
-          </div>
-          </div>
+        </div>
       </>
     );
   }

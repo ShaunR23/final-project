@@ -147,11 +147,7 @@ function Register(props) {
               </a>
             </div>
           </form>
-          {/* <div class="text-center">
-                <p class="text-gray-dark text-sm">Don't have an account? <a href="#" class="no-underline text-blue font-bold">Create an Account</a>.</p>
-            </div> */}
         </div>
-        {/* </form> */}
       </div>
     </div>
   );

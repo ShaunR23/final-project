@@ -170,13 +170,6 @@ function Login() {
               >
                 Sign in with Twitter
               </button>
-
-              {/* <a
-                className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark float-right"
-                href="#"
-              >
-                Forgot Password?
-              </a> */}
             </div>
           </form>
           <div className="text-center">

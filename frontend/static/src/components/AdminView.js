@@ -8,7 +8,7 @@ function AdminView(props) {
   const [questions, setQuestions] = useState(props.questions);
   const [view, setView] = useState(null);
 
-  // const [state, setState] = useState({ ...props });
+  
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -57,7 +57,7 @@ function AdminView(props) {
     const response = await fetch(`/api/v1/admin-view/${id}`, options).catch(
       handleError
     );
-    // const json = await response.json();
+    
 
     if (!response.ok) {
       throw new Error("Network response was not OK");
@@ -69,10 +69,7 @@ function AdminView(props) {
     updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
 
-    // const viewAfterDelete = view.filter((question) => {
-    //   return question.id !== id;
-    // });
-    // setView(viewAfterDelete);
+    
   };
 
   const questionList = questions.map((question) => (

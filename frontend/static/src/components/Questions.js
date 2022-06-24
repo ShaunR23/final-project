@@ -46,36 +46,6 @@ function Question({
 
   return (
     <article className="text-center col col-md-3">
-      {/* <Card className = 'article-cards font-serif'>
-        <h6 className='font-serif'>{question}</h6>
-        <Card.Body>
-          <p className='font-serif'>{incorrectAnswer1}</p>
-          <p className='font-serif'>{incorrectAnswer2}</p>
-          <p className='font-serif'>{incorrectAnswer3}</p>
-          <p className='font-serif'>Correct Answer = {correctAnswer}</p>
-
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Body>
-              <QuestionForm
-                question={question}
-                incorrectAnswer1={incorrectAnswer1}
-                incorrectAnswer2={incorrectAnswer2}
-                incorrectAnswer3={incorrectAnswer3}
-                correctAnswer={correctAnswer}
-                phase={phase}
-              />
-            </Modal.Body>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal>
-          <button className="articleBtn" variant="primary" onClick= {handleShow}>
-            Edit
-          </button> 
-          <br></br>
-          {/* <button className="articleBtn2 mt-1" variant="primary" onClick={() => handleDelete(question.id)}>
-            Delete
-          </button> */}
       <div className=" flex flex-row  justify-center mt-8 ">
         <div className="container rounded-2xl mt-10   pt-10  pb-10">
           <h6 className="font-serif text-white">{question}</h6>
@@ -111,9 +81,6 @@ function Question({
             Edit
           </button>
           <br></br>
-          {/* <button className="btn articleBtn2 text-white  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-3 text-center " variant="primary" onClick={handleClose}>
-            Delete
-          </button> */}
         </div>
       </div>
     </article>
